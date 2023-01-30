@@ -1,1 +1,9 @@
-<p>course works!</p>
+
+<div class="alert alert-success" *ngIf="feedback && feedback.success">
+    {{feedback.message}}
+</div>
+
+
+<div class="alert alert-danger" *ngIf="feedback && !feedback.success">
+    {{feedback.message}}
+</div>

@@ -2,7 +2,7 @@ h5 {
     background-color:  rgb(77, 138, 77);
     padding: 20PX;
     margin: 0;
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
 }

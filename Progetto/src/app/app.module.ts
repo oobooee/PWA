@@ -8,6 +8,8 @@ import { HeaderComponent } from './commons/header/header.component';
 import { FooterComponent } from './commons/footer/footer.component';
 import { CoursePageComponent } from './courses/course-page/course-page.component';
 import { CourseComponent } from './courses/course/course.component';
+import { HomePageComponent } from './home/home-page/home-page.component';
+import { CarouselComponent } from './commons/carousel/carousel.component';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { CourseComponent } from './courses/course/course.component';
     FooterComponent,
     CoursePageComponent,
     CourseComponent,
+    HomePageComponent,
+    CarouselComponent,
 
   ],
   imports: [
@@ -27,4 +31,8 @@ import { CourseComponent } from './courses/course/course.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(){
+    console.log("AppModule created");
+  }
+}
