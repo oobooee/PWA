@@ -1,40 +1,41 @@
-<p>Pagina di corsi</p>
-<div>
-  <button class="btn btn-primary btn-sm ">Create a new one</button>
-</div>
 
 
 <div class="row">
   <div class="col-md-6">
-   <p>in colonna</p>
-    <table class="table">
-
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">ID</th>
-          <th scope="col">Title</th>
-
-        </tr>
-      </thead>
-      
-      <tbody>
-        <tr *ngFor="let c of courses; index as i">
-          <td>{{i}}</td>
-          <td [ngStyle]="{'font-weight':'bold'}">{{c.id_corso}}</td>
-          <td>{{c.titolo}}</td>
-          <td><button class="btn btn-warning  btn-sm">Edit</button></td>
-          <td><button class="btn btn-danger  btn-sm">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
-
+            <p>Pagina di corsi course page component</p>
+            <div class="alert alert-success" *ngIf="feedback && feedback.success">
+              {{feedback.message}}
+            </div>
+            <div class="alert alert-danger" *ngIf="feedback && !feedback.success">
+                {{feedback.message}}
+            </div>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let c of courses; index as i">
+                        <td>{{i}}</td>
+                        <td [ngStyle]="{'font-weight':'bold'}">{{c.id_corso}}</td>
+                        <td>{{c.titolo}}</td>
+                        <td><button class="btn btn-warning  btn-sm" (click)="getCourse(c)">Edit</button></td>
+                        <td><button class="btn btn-danger  btn-sm">Delete</button></td>
+                      </tr>
+                    </tbody>
+                  </table>          
   </div>
-  <div class="col-md-6">
-    <p>in colonna</p>
-    <app-course></app-course>
-  </div>
-
+                  <div class="col-md-6">
+                    <p>Pagina di corso course component</p>
+                    <app-course [course]="courseEdited" (feedbackEvent)="feedbackEvHandler($event)"></app-course>
+                  </div>
 </div>
+
+
+
+
 
   

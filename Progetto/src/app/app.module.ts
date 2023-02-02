@@ -10,7 +10,12 @@ import { CoursePageComponent } from './courses/course-page/course-page.component
 import { CourseComponent } from './courses/course/course.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { CarouselComponent } from './commons/carousel/carousel.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginPageComponent } from './login/login-page/login-page.component';
+import { HighlightDirective } from './commons/directives/highlight.directive';
+import { EmailValidatorDirective } from './commons/directives/email-validator.directive';
+import { TextValidatorDirective } from './commons/directives/text-validator.directive';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,12 +26,19 @@ import { CarouselComponent } from './commons/carousel/carousel.component';
     CourseComponent,
     HomePageComponent,
     CarouselComponent,
+    LoginPageComponent,
+    HighlightDirective,
+    EmailValidatorDirective,
+    TextValidatorDirective,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule, 
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

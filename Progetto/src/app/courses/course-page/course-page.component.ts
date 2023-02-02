@@ -1,6 +1,8 @@
 import { NgClass } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Feedback } from 'src/app/model/feedback.model';
 import { Course } from '../../model/course.model';
+import { CourseService } from 'src/app/services/course.service';
 
 @Component({
   selector: 'app-course-page',
@@ -11,23 +13,43 @@ import { Course } from '../../model/course.model';
 export class CoursePageComponent implements OnInit, OnDestroy{
   
       courses?: Array<Course>;
-      constructor(){
-        console.log("creato");
-      
+      courseEdited?: Course;
+      feedback?: Feedback
+      constructor(private courseService: CourseService){
+        console.log("Course page created");
+        
       }
 
   ngOnInit(): void {
-    console.log("course page created");
-    this.courses = [
-      {id_corso:213, titolo:"Programming in cobol"},
-      {id_corso:123, titolo: "Programming in javascript"},
-    ];
-
+    console.log("ngOnINit coursepage component");
+    this.courseService.getAllCourses()?.subscribe(data => {
+      this.courses = data;
+    }, error => {
+      console.log(`Error: ${JSON.stringify(error)}`);
+      this.feedback ={success:false, message: "Operation failed. unable to retrieve data "};
+    })
   }
   ngOnDestroy(): void {
     console.log("course page destroyed")
   }
-     
+  
+  feedbackEvHandler(f: Feedback){
+    console.log(JSON.stringify(f));
+    this.feedback = f;
+  
+  }
+
+  refresh(){
+    alert("Refresh !")
+  }
+  getInfo(){
+    alert("Mostra edit")
+  }
+  getCourse(c: Course){
+    //this.refresh();
+    this.courseEdited = c;
+    console.log(JSON.stringify(c));
+  }
 }
 
 

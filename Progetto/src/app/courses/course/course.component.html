@@ -1,9 +1,24 @@
+<p>Course component</p>
+<br>
+<form [formGroup]="courseForm" (ngSubmit)="save()">
+    <div class="form-group">
+        <label for="id_corso">ID</label>
+        <input  id="id_corso" class="form-control" type="number" formControlName="id_corso">        
+    
+    </div>
+    <div class="form-group">
+        <label for="titolo">Title</label>
+        <input  id="titolo" class="form-control" type="text" formControlName="titolo">        
+        <ngb-toast header="Compiling info" *ngIf="!courseForm.get('titolo')?.valid && !courseForm.get('titolo')?.pristine" (hide)="courseForm.get('titolo')?.valid && courseForm.get('titolo')?.pristine">
+            <!-- Content here -->
+            Title have to be between 5 and 25 alphanumeric characters 
+          </ngb-toast>
+    </div>
 
-<div class="alert alert-success" *ngIf="feedback && feedback.success">
-    {{feedback.message}}
-</div>
+    <br>
+    <button type="submit" class="btn btn-secondary" [disabled]="!courseForm.valid">Save</button>
+
+   
+</form>
 
 
-<div class="alert alert-danger" *ngIf="feedback && !feedback.success">
-    {{feedback.message}}
-</div>

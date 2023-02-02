@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CourseService } from 'src/app/services/course.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
 })
 export class HomePageComponent {
   title = 'Progetto MWT Marco e Fabio';
+  
+  
+  constructor(private courseService: CourseService) {
+    console.log("HomePageComponent service created");
+  }
 
 }
