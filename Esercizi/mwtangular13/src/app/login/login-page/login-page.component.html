@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Login</h5>
+                <form #loginForm="ngForm" (ngSubmit)="login()">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" class="form-control" 
+                               name="username" [(ngModel)]="loginData.username"
+                               #username="ngModel"> <!-- email-validator -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" class="form-control" 
+                               name="password" [(ngModel)]="loginData.password"
+                               #password="ngModel" required>
+                    </div>
+
+                    <br>
+
+                    <button type="submit" class="btn btn-success" 
+                            [disabled]="!loginForm.valid">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+USERNAME VALID? {{ username.valid }} <br>
+FORM VALID? {{ loginForm.valid }}

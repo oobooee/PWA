@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../model/course.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, retry, throwError } from 'rxjs';
+import { Observable, catchError, concat, retry, throwError } from 'rxjs';
 
-const path = "http://localhost:8080/progetto/rest/corsi/"
+const path = "http://localhost:8080/progetto/rest/corsi?titolo="
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +31,16 @@ export class CourseService {
   }
 
   addCourse(c: Course): Observable<Course> {
-   
-    return this.httpClient.post<Course>(path,c)
+     return this.httpClient.post<Course>(path,c)
+    .pipe(retry(3),
+     catchError(this.handleError));
+  }
+
+  getAllCoursesBytitle(title: string): Observable<Array<Course>> | undefined{
+    
+    const path2 = path.concat(title);
+    console.log(path2);
+    return this.httpClient.get<Array<Course>>(path2)
     .pipe(retry(3),
      catchError(this.handleError));
   }

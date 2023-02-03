@@ -18,4 +18,11 @@ export class CustomValidators{
         ? { textFormatValidator:{valid:false, value: control.value}}
         :{};
     }
+    public static search(control: AbstractControl): ValidationErrors{
+        const TEXTREGEXP=/^[A-Za-z0-9].{2,25}$/
+        const error = !TEXTREGEXP.test(control.value);
+        return error
+        ? { textFormatValidator:{valid:false, value: control.value}}
+        :{};
+    }
 }

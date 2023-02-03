@@ -16,6 +16,7 @@ import { HighlightDirective } from './commons/directives/highlight.directive';
 import { EmailValidatorDirective } from './commons/directives/email-validator.directive';
 import { TextValidatorDirective } from './commons/directives/text-validator.directive';
 import {HttpClientModule} from '@angular/common/http';
+import { ObservablePageComponent } from './observables/observable-page/observable-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {HttpClientModule} from '@angular/common/http';
     HighlightDirective,
     EmailValidatorDirective,
     TextValidatorDirective,
+    ObservablePageComponent,
 
   ],
   imports: [

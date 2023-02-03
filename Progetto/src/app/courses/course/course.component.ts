@@ -21,6 +21,7 @@ export class CourseComponent implements OnInit {
   feedbackEvent: EventEmitter<Feedback>
 
   courseForm: FormGroup;
+  //courseSearch: FormGroup;
 
   constructor(private fb: FormBuilder, private courseservice:CourseService) {
     this.feedbackEvent = new EventEmitter();
@@ -30,6 +31,7 @@ export class CourseComponent implements OnInit {
        id_corso:[,[]],
        titolo: ['', [CustomValidators.notempty]] 
        });
+      
   }
 
 
@@ -52,6 +54,7 @@ export class CourseComponent implements OnInit {
     
 
   }
+  
   localAlert() {
     alert("alert semplice");
   }

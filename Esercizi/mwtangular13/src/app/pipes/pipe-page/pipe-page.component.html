@@ -1,0 +1,48 @@
+<h1>Pipes:</h1>
+
+<div>
+    <h2> DatePipe </h2>
+    <span> {{ now | date: "dd/MM/yyyy" }} </span>
+</div>
+
+<br>
+
+<div>
+    <h2> UppercasePipe </h2>
+    <span> {{ greeting | uppercase }} </span>
+</div>
+
+<br>
+
+<div>
+    <h2> LowercasePipe </h2>
+    <span> {{ upperString | lowercase }} </span>
+</div>
+
+<br>
+
+<div>
+    <h2> Currency </h2>
+    <span> {{ money | currency: 'EUR' }} </span>
+</div>
+
+<br>
+
+<div>
+    <h2> JSON pipe: </h2>
+    <span> {{ book | json }} </span>
+</div>
+
+<br>
+
+<div>
+    <h2> Chaining pipes: </h2>
+    <span> {{ now | date: 'fullDate' | uppercase }} </span>
+</div>
+
+<br>
+
+<div>
+    <h2> Exponential strength: </h2>
+    <span> {{ expBase | exponentialStrength: 3 }} </span>
+</div>

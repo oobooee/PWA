@@ -3,6 +3,9 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Feedback } from 'src/app/model/feedback.model';
 import { Course } from '../../model/course.model';
 import { CourseService } from 'src/app/services/course.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { CustomValidators } from 'src/app/commons/validators/custom-validators';
 
 @Component({
   selector: 'app-course-page',
@@ -13,32 +16,58 @@ import { CourseService } from 'src/app/services/course.service';
 export class CoursePageComponent implements OnInit, OnDestroy{
   
       courses?: Array<Course>;
+      courseSearch: FormGroup;
       courseEdited?: Course;
       feedback?: Feedback
-      constructor(private courseService: CourseService){
+      constructor(private fb: FormBuilder, private courseService: CourseService){
+        this.courseSearch = this.fb.group(
+          {
+           titolo: ['', [CustomValidators.search]]
+           });
         console.log("Course page created");
         
       }
 
   ngOnInit(): void {
-    console.log("ngOnINit coursepage component");
-    this.courseService.getAllCourses()?.subscribe(data => {
-      this.courses = data;
-    }, error => {
-      console.log(`Error: ${JSON.stringify(error)}`);
-      this.feedback ={success:false, message: "Operation failed. unable to retrieve data "};
-    })
+  
   }
   ngOnDestroy(): void {
     console.log("course page destroyed")
   }
-  
+  ngOnUpdate(): void{
+    console.log("course page updated")
+  }
   feedbackEvHandler(f: Feedback){
     console.log(JSON.stringify(f));
     this.feedback = f;
   
   }
+  view_getAllCourses(): void{
+    console.log("ngOnINit coursepage component");
+     this.courseService.getAllCourses()?.subscribe(data => {
+    this.courses = data;
+  }, error => {
+    this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations`};
+  })
+  }
+  view_getAllCoursesBytitle(title: string): void{
+    console.log("ngOnINit coursepage component");
+      this.courseService.getAllCoursesBytitle(title)?.subscribe(data => {
+      this.courses = data;
+  }, error => {
+    this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations`};
+  })
+  }
 
+  search(){  
+    const coursetitle: string = this.courseSearch.value.titolo;
+    console.log(coursetitle);
+    //this.courseSearch.reset();
+   // this.courses = this.courseService.getAllCoursesBytitle(coursetitle);
+    this.view_getAllCoursesBytitle(coursetitle);
+    //this.courseSearch.reset();
+   // this.sendFeedback();
+}
   refresh(){
     alert("Refresh !")
   }

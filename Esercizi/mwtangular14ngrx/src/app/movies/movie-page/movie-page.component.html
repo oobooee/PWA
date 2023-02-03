@@ -1,0 +1,11 @@
+<div class="row justify-content-center" *ngFor="let m of movies$ | async">
+    <div class="col-auto">
+        <div class="card" style="width: 20rem; margin-bottom: 10px">
+            <img [src]="m?.image?.medium" class="card-img-top" [alt]="m.name">
+            <div class="card-body">
+              <h5 class="card-title">{{ m.name }}</h5>
+              <p class="card-text" [innerHTML]="m.summary"></p>
+            </div>
+          </div>
+    </div>
+</div>
