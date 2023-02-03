@@ -4,11 +4,12 @@ import { CoursePageComponent } from './courses/course-page/course-page.component
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { LoginPageComponent } from './login/login-page/login-page.component';
 import { ObservablePageComponent } from './observables/observable-page/observable-page.component';
+import { AuthGuardService } from './login/login-page/auth-guard.service';
 
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
-  {path: 'ro_courses', component: CoursePageComponent},
+  {path: 'admin-ops', component: CoursePageComponent, canActivate:[AuthGuardService]},
   {path: 'login', component: LoginPageComponent},
   {path: 'observables', component: ObservablePageComponent}];
 

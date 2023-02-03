@@ -17,6 +17,26 @@ import { EmailValidatorDirective } from './commons/directives/email-validator.di
 import { TextValidatorDirective } from './commons/directives/text-validator.directive';
 import {HttpClientModule} from '@angular/common/http';
 import { ObservablePageComponent } from './observables/observable-page/observable-page.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { LoginResult } from './login/login-page/login-result.model';
+import { AppConstants } from './app.constants';
+
+
+export function tokenGetter() {
+  let loginStored: LoginResult;
+
+  let loginStr: string | null = localStorage.getItem(
+    AppConstants.LOGIN_STORAGE
+    );
+  
+  if (loginStr !== '' && loginStr !== null && loginStr !== undefined){
+    loginStored = JSON.parse(loginStr);
+  
+  } else {
+    return '';
+  }
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -40,7 +60,14 @@ import { ObservablePageComponent } from './observables/observable-page/observabl
     NgbModule, 
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:8080/progetto/rest']
+        //disallowedRoutes: ["http://example.com/examplebadroute/"],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -48,5 +75,7 @@ import { ObservablePageComponent } from './observables/observable-page/observabl
 export class AppModule { 
   constructor(){
     console.log("AppModule created");
+
+    
   }
 }
