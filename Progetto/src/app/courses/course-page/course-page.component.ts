@@ -6,6 +6,7 @@ import { CourseService } from 'src/app/services/course.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { CustomValidators } from 'src/app/commons/validators/custom-validators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-page',
@@ -19,6 +20,9 @@ export class CoursePageComponent implements OnInit, OnDestroy{
       courseSearch: FormGroup;
       courseEdited?: Course;
       feedback?: Feedback
+      getcourseSubscr?:Subscription;
+      getcoursesbytitleSubscr?:Subscription
+
       constructor(private fb: FormBuilder, private courseService: CourseService){
         this.courseSearch = this.fb.group(
           {
@@ -31,9 +35,7 @@ export class CoursePageComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
   
   }
-  ngOnDestroy(): void {
-    console.log("course page destroyed")
-  }
+ 
   ngOnUpdate(): void{
     console.log("course page updated")
   }
@@ -44,7 +46,7 @@ export class CoursePageComponent implements OnInit, OnDestroy{
   }
   view_getAllCourses(): void{
     console.log("ngOnINit coursepage component");
-     this.courseService.getAllCourses()?.subscribe(data => {
+    this.getcourseSubscr = this.courseService.getAllCourses()?.subscribe(data => {
     this.courses = data;
   }, error => {
     this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations`};
@@ -52,13 +54,16 @@ export class CoursePageComponent implements OnInit, OnDestroy{
   }
   view_getAllCoursesBytitle(title: string): void{
     console.log("ngOnINit coursepage component");
-      this.courseService.getAllCoursesBytitle(title)?.subscribe(data => {
+      this.getcoursesbytitleSubscr = this.courseService.getAllCoursesBytitle(title)?.subscribe(data => {
       this.courses = data;
   }, error => {
     this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations`};
   })
   }
-
+  ngOnDestroy(): void {
+     this.getcoursesbytitleSubscr?.unsubscribe();
+     this.getcourseSubscr?.unsubscribe();
+  }
   search(){  
     const coursetitle: string = this.courseSearch.value.titolo;
     console.log(coursetitle);
