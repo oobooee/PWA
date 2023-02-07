@@ -6,6 +6,8 @@ import { AppConstants } from '../app.constants';
 import { LoginData } from '../login/login-page/login.model';
 import { LoginResult } from '../login/login-page/login-result.model';
 
+// chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
+
 
 @Injectable({
   providedIn: 'root',

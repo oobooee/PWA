@@ -41,8 +41,12 @@
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li>
-      </ul>
-
+      </ul> 
+      <ul class="nav navbar-nav navbar-right" *ngIf="isLogged()"></ul>
+        <button class="btn btn-dark" (click)="logout()">Logout</button>
+   
+      
+    
     </div>
   </div>
 </nav>
