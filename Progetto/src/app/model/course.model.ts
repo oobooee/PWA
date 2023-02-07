@@ -5,8 +5,8 @@ export interface Course{
    numPostiDisponibili?: number | null | undefined;
    previstoEsame?: string | null | undefined;
    prezzo:number | null | undefined;
-   inizio:string | null | undefined;
-   fine:string | null | undefined;
+   inizio:Date | null | undefined;
+   fine:Date | null | undefined;
    crediti:number | null | undefined;
    ore:number | null | undefined;
    descrizione:string | null | undefined;

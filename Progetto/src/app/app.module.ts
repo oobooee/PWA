@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './commons/header/header.component';
 import { FooterComponent } from './commons/footer/footer.component';
-import { CoursePageComponent } from './courses/course-page/course-page.component';
-import { CourseComponent } from './courses/course/course.component';
+
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { CarouselComponent } from './commons/carousel/carousel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +19,7 @@ import { ObservablePageComponent } from './observables/observable-page/observabl
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginResult } from './login/login-page/login-result.model';
 import { AppConstants } from './app.constants';
+import { PipePageComponent } from './pipes/pipe-page/pipe-page.component';
 
 
 export function tokenGetter() {
@@ -43,8 +43,7 @@ export function tokenGetter() {
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    CoursePageComponent,
-    CourseComponent,
+  
     HomePageComponent,
     CarouselComponent,
     LoginPageComponent,
@@ -52,6 +51,7 @@ export function tokenGetter() {
     EmailValidatorDirective,
     TextValidatorDirective,
     ObservablePageComponent,
+    PipePageComponent,
 
   ],
   imports: [

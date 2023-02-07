@@ -5,13 +5,15 @@ import { HomePageComponent } from './home/home-page/home-page.component';
 import { LoginPageComponent } from './login/login-page/login-page.component';
 import { ObservablePageComponent } from './observables/observable-page/observable-page.component';
 import { AuthGuardService } from './login/login-page/auth-guard.service';
+import { PipePageComponent } from './pipes/pipe-page/pipe-page.component';
 
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
-  {path: 'admin-ops', component: CoursePageComponent, canActivate:[AuthGuardService]},
   {path: 'login', component: LoginPageComponent},
-  {path: 'observables', component: ObservablePageComponent}];
+  {path: 'observables', component: ObservablePageComponent},
+  {path: 'pipes', component: PipePageComponent},
+  { path: 'admin-ops', loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule), canActivate:[AuthGuardService] }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

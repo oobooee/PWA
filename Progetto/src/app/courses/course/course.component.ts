@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { CustomValidators } from 'src/app/commons/validators/custom-validators';
 import { Course } from 'src/app/model/course.model';
 import { Feedback } from 'src/app/model/feedback.model';
-import { CourseService } from 'src/app/services/course.service';
+import { CourseService } from 'src/app/courses/course.service';
 
 @Component({
   selector: 'app-course',
@@ -54,6 +54,7 @@ export class CourseComponent implements OnInit {
     
 
   }
+   
   
   localAlert() {
     alert("alert semplice");

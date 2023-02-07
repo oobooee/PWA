@@ -2,7 +2,7 @@ import { NgClass } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Feedback } from 'src/app/model/feedback.model';
 import { Course } from '../../model/course.model';
-import { CourseService } from 'src/app/services/course.service';
+import { CourseService } from 'src/app/courses/course.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { CustomValidators } from 'src/app/commons/validators/custom-validators';

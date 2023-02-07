@@ -32,13 +32,17 @@
       <th scope="col">#</th>
       <th scope="col">ID</th>
       <th scope="col">Title</th>
+      <th scope="col">StartDate</th>
+      <th scope="col">EndDate</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let c of courses; index as i">
       <td>{{i}}</td>
       <td [ngStyle]="{'font-weight':'bold'}">{{c.id_corso}}</td>
-      <td>{{c.titolo}}</td>
+      <td>{{c.titolo | uppercase}}</td>
+      <td>{{c.inizio | date:"dd/MM/yyyy HH:mm"}}</td>
+      <td>{{c.fine | date:"dd/MM/yyyy HH:mm"}}</td>
       <td><button class="btn btn-warning  btn-sm" (click)="getCourse(c)">Edit</button></td>
       <td><button class="btn btn-danger  btn-sm">Delete</button></td>
     </tr>

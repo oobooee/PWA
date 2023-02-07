@@ -13,6 +13,7 @@ import { LoginResult } from '../login/login-page/login-result.model';
   providedIn: 'root',
 })
 export class LoginService {
+  displayLoggedOut?:string;
   constructor(
     private httpClient: HttpClient,
     private jwtHelper: JwtHelperService
@@ -43,6 +44,8 @@ export class LoginService {
       localStorage.setItem(AppConstants.LOGIN_STORAGE, '');
       tokenExpired = true;
       this.httpClient.delete(token);
+      console.log("token expired");
+      this.isTokenExpired();
     }
 
     // Check whether the token is expired and return
@@ -54,5 +57,9 @@ export class LoginService {
     
     localStorage.setItem(AppConstants.LOGIN_STORAGE, '');
 
+  }
+
+  public  isTokenExpired(){
+    this.displayLoggedOut = "displayLoggedOut"
   }
 }
