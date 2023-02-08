@@ -21,4 +21,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule
   ]
 })
-export class CoursesModule { }
+export class CoursesModule {
+   constructor(){
+    console.log("CoursesModule created")
+   }
+
+}

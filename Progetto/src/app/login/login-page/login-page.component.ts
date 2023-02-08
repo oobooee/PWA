@@ -21,7 +21,7 @@ export class LoginPageComponent {
     console.log(JSON.stringify(this.loginData));
     this.loginService.login(this.loginData).subscribe(res => {
       localStorage.setItem(AppConstants.LOGIN_STORAGE, JSON.stringify(res));
-      this.router.navigate(['admin-ops']);
+      this.router.navigate(['admin-ops', 'pipes']);
       console.log(  `${JSON.stringify(res)}`);
   }, error => {
     console.log(  `${JSON.stringify(error)}`);

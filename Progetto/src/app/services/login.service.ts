@@ -38,9 +38,7 @@ export class LoginService {
     const token = login.token;
     let tokenExpired: boolean = false;
 
-    console.log('DECODED TOKEN: ' + this.jwtHelper.decodeToken(token));
-
-    if (this.jwtHelper.isTokenExpired(token)) {
+      if (this.jwtHelper.isTokenExpired(token)) {
       localStorage.setItem(AppConstants.LOGIN_STORAGE, '');
       tokenExpired = true;
       this.httpClient.delete(token);

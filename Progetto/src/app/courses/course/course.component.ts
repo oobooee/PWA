@@ -36,7 +36,7 @@ export class CourseComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+   
   }
 
 
