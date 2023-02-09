@@ -20,6 +20,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LoginResult } from './login/login-page/login-result.model';
 import { AppConstants } from './app.constants';
 import { PipePageComponent } from './pipes/pipe-page/pipe-page.component';
+import { UsersPageComponent } from './users/users-page/users-page.component';
+import { UsersComponent } from './users/users/users.component';
 
 
 export function tokenGetter() {
@@ -52,6 +54,8 @@ export function tokenGetter() {
     TextValidatorDirective,
     ObservablePageComponent,
     PipePageComponent,
+    UsersPageComponent,
+    UsersComponent,
 
   ],
   imports: [

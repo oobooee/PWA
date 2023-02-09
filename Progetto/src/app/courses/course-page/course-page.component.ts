@@ -18,7 +18,8 @@ export class CoursePageComponent implements OnInit, OnDestroy{
   
       courses?: Array<Course>;
       courseSearch: FormGroup;
-      courseEdited?: Course;
+      courseEdited?: Course
+      temp?: Course;
       feedback?: Feedback
       getcourseSubscr?:Subscription;
       getcoursesbytitleSubscr?:Subscription
@@ -79,12 +80,24 @@ export class CoursePageComponent implements OnInit, OnDestroy{
   getInfo(){
     alert("Mostra edit")
   }
-  getCourse(c: Course){
+  editCourse(c: Course){
     //this.refresh();
     this.courseEdited = c;
     console.log(JSON.stringify(c));
   }
-}
 
+  deleteCourse(c: Course): void{
+
+    this.courses?.forEach( (course, index) => {
+      console.log(JSON.stringify(this.courses));
+      if(course.id_corso == c.id_corso){
+        this.courses?.splice(index, 1);
+        }
+  });
+    
+    
+   }
+  
+  }
 
 

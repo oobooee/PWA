@@ -23,7 +23,7 @@ export class LoginPageComponent {
       localStorage.setItem(AppConstants.LOGIN_STORAGE, JSON.stringify(res));
       console.log(res.username);
       if (res.username == "admin"){
-        this.router.navigate(['admin-ops']);
+        this.router.navigate(['']);
       }
       else {
         this.router.navigate(['observable']);

@@ -19,18 +19,25 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   
   }
+  isLoggedAdmin(): boolean{
+    return this.authService.isAuthenticated();
+  }
   isLogged(): boolean{
     return this.authService.isAuthenticated();
   }
   logout(): void{
     this.authService.logout();
     this.closeModalMessage();
-    this.router.navigate(['login']);
+    this.router.navigate(['']);
   }
 
+  hide(): void{
+    this.hide();
+  }
 
   openModalMessage(){
     this.display = "block";
+    
   }
   closeModalMessage(){
     this.display = "none";

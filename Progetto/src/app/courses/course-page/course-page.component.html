@@ -1,9 +1,3 @@
-<div class="alert alert-success" *ngIf="feedback && feedback.success">
-  {{feedback.message}}
-</div>
-<div class="alert alert-danger" *ngIf="feedback && !feedback.success">
-  {{feedback.message}}
-</div>
 
 <div class="row">
   <div class="col-md-6">
@@ -43,8 +37,16 @@
       <td>{{c.titolo | uppercase}}</td>
       <td>{{c.inizio | date:"dd/MM/yyyy HH:mm"}}</td>
       <td>{{c.fine | date:"dd/MM/yyyy HH:mm"}}</td>
-      <td><button class="btn btn-warning  btn-sm" (click)="getCourse(c)">Edit</button></td>
-      <td><button class="btn btn-danger  btn-sm">Delete</button></td>
+      <td>
+        <svg type= button class="bi" width="26" height="26" fill="currentColor" (click)="editCourse(c)">
+          <use xlink:href="bootstrap-icons.svg#pencil-square"/>
+        </svg>
+      </td>
+      <td>
+        <svg type= button class="bi" width="26" height="26" fill="currentColor" (click)="deleteCourse(c)">
+          <use xlink:href="bootstrap-icons.svg#trash"/>
+        </svg>
+      </td>
     </tr>
   </tbody>
 </table>
