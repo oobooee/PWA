@@ -20,11 +20,13 @@ export class LoginService {
   ) {}
 
   public login(loginData: LoginData): Observable<LoginResult> {
+    
     return this.httpClient.post<LoginResult>(AppConstants.LOGIN_ENDPOINT, loginData);
   }
 
   public isAuthenticated(): boolean {
     let login: LoginResult;
+    
     let loginStr: string | null = localStorage.getItem(
       AppConstants.LOGIN_STORAGE
     );

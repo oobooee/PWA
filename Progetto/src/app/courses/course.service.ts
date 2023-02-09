@@ -10,7 +10,7 @@ const path = "http://localhost:8080/progetto/rest/corsi?titolo="
 })
 export class CourseService {
 
-  //courses?: Array<Course>;
+  courses?: Array<Course>;
   
   constructor(private httpClient:HttpClient) { 
     console.log("Course service");
