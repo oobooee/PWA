@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppConstants } from 'src/app/app.constants';
@@ -6,11 +7,11 @@ import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+  templateUrl: './login-page.component.html'
 })
 export class LoginPageComponent {
 
+  display:string = "";
   loginData: LoginData;
   constructor(private loginService: LoginService, private router: Router){
     this.loginData = {username: '', password: ''}
@@ -20,20 +21,31 @@ export class LoginPageComponent {
   loginSubmit(){
     console.log(JSON.stringify(this.loginData));
     this.loginService.login(this.loginData).subscribe(res => {
-      localStorage.setItem(AppConstants.LOGIN_STORAGE, JSON.stringify(res));
-      console.log(res.username);
-      if (res.username == "admin"){
-        this.router.navigate(['']);
-      }
-      else {
-        this.router.navigate(['observable']);
-      }
       
+      //localStorage.setItem(AppConstants.LOGIN_STORAGE, JSON.stringify(res));
+     
+        this.router.navigate(['']);
+        localStorage.setItem(AppConstants.LOGIN_STORAGE, JSON.stringify(res));
+             
       console.log(  `${JSON.stringify(res)}`);
-  }, error => {
-    console.log(  `${JSON.stringify(error)}`);
+  }, (err: any) => {
+    if (err instanceof HttpErrorResponse) {
+      if (err.status !== 401) {
+       return;
+      }
+      this.router.navigate(['login']);
+    }
+    this.openModalMessage();
+    console.log( "Unauthorized");
   })
   }
 
   
+  openModalMessage(){
+    this.display = "block";
+    
+  }
+  closeModalMessage(){
+    this.display = "none";
+  }
 }

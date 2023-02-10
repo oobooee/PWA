@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CoursePageComponent } from './courses/course-page/course-page.component';
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { LoginPageComponent } from './login/login-page/login-page.component';
 import { ObservablePageComponent } from './observables/observable-page/observable-page.component';
 import { AuthGuardService } from './login/login-page/auth-guard.service';
 import { PipePageComponent } from './pipes/pipe-page/pipe-page.component';
+import { AuthGuardServiceUser } from './login/login-page/auth-guard-user.service';
 
 
 const routes: Routes = [
@@ -14,7 +14,11 @@ const routes: Routes = [
   {path: 'observables', component: ObservablePageComponent},
   {path: 'pipes', component: PipePageComponent},
   { path: 'admin-ops', loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule), canLoad:[AuthGuardService] },
-  { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canLoad:[AuthGuardService] }];
+  { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canLoad:[AuthGuardService] },
+  { path: 'mycourses', loadChildren: () => import('./mycourses/mycourses.module').then(m => m.MycoursesModule),  canLoad:[AuthGuardServiceUser] },
+  
+
+];
   //canActivate:[AuthGuardService] }];
 
 @NgModule({

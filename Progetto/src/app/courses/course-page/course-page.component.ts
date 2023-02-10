@@ -87,7 +87,6 @@ export class CoursePageComponent implements OnInit, OnDestroy{
   }
 
   deleteCourse(c: Course): void{
-
     this.courses?.forEach( (course, index) => {
       console.log(JSON.stringify(this.courses));
       if(course.id_corso == c.id_corso){

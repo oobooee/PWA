@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./users-page.component.css']
 })
 export class UsersPageComponent {
-
+  constructor(){
+    console.log("UsersPageComponent created");
+  }
 }

@@ -11,7 +11,6 @@ import { LoginService } from 'src/app/services/login.service';
 export class HeaderComponent implements OnInit {
 
   display:string = "";
-  displayLoggedOut: string = "";
   constructor(private authService: LoginService, private router: Router){
 
 
@@ -19,16 +18,17 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   
   }
-  isLoggedAdmin(): boolean{
-    return this.authService.isAuthenticated();
-  }
   isLogged(): boolean{
     return this.authService.isAuthenticated();
+    
+  }
+  isLoggedUser(): boolean{
+    return this.authService.isAuthenticatedUser();
   }
   logout(): void{
     this.authService.logout();
     this.closeModalMessage();
-    this.router.navigate(['']);
+    this.router.navigate(['login']);
   }
 
   hide(): void{

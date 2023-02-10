@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class UsersComponent {
 
+  constructor(){
+    console.log("UsersComponent created");
+  }
 }

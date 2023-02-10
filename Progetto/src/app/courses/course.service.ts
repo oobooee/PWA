@@ -3,7 +3,7 @@ import { Course } from '../model/course.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, concat, retry, throwError } from 'rxjs';
 
-const path = "http://localhost:8080/progetto/rest/corsi?titolo="
+const path = "http://172.18.0.110:8080/progetto/rest/corsi?titolo="
 
 @Injectable({
   providedIn: 'root'
