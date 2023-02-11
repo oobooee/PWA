@@ -6,3 +6,8 @@ h5 {
     bottom: 0;
     width: 100%;
 }
+footer{
+    position:fixed;
+    bottom:0px;
+    width:100%;
+    }
