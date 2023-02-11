@@ -49,7 +49,8 @@ export class CoursePageComponent implements OnInit, OnDestroy{
     console.log("ngOnINit coursepage component");
     this.getcourseSubscr = this.courseService.getAllCourses()?.subscribe(data => {
     this.courses = data;
-    this.feedback ={success:true, message: `Done. Data has been retrieved successfully from ${this.courseService.getpath().toString}`};
+    this.feedback ={success:true, message: `Done. Data has been retrieved successfully`};
+    
   }, error => {
     this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations. You are working with cashed data`};
   })
@@ -58,7 +59,7 @@ export class CoursePageComponent implements OnInit, OnDestroy{
     console.log("ngOnINit coursepage component");
       this.getcoursesbytitleSubscr = this.courseService.getAllCoursesBytitle(title)?.subscribe(data => {
       this.courses = data;
-      this.feedback ={success:true, message: `Done. Data has been retrieved successfully from ${this.courseService.getpath}`};
+      this.feedback ={success:true, message: `Done. Data has been retrieved successfully`};
   }, error => {
     this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations, You are working with cashed data`};
   })
