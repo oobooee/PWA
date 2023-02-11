@@ -26,5 +26,19 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "books-api",
+      "urls": [
+        "/v1/**"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness", 
+        "maxSize": 100,
+        "maxAge": "3d2h",
+        "timeout": "5s"
+      }
+    }
   ]
 }

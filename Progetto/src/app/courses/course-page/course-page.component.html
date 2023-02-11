@@ -1,4 +1,11 @@
 
+<div class="alert alert-success" *ngIf="feedback && feedback.success">
+  {{ feedback.message }}
+</div>
+
+<div class="alert alert-danger" *ngIf="feedback && !feedback.success">
+  {{ feedback.message }}
+</div>
 <div class="row">
   <div class="col-md-6">
     <p>Pagina di corsi course page component</p>
@@ -19,7 +26,38 @@
       </div>
     </div>
 
-
+    <table mat-table></table>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Title</th>
+          <th scope="col">StartDate</th>
+          <th scope="col">EndDate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of courses; index as i">
+          <td>{{i}}</td>
+          <td [ngStyle]="{'font-weight':'bold'}">{{c.id_corso}}</td>
+          <td>{{c.titolo | uppercase}}</td>
+          <td>{{c.inizio | date:"dd/MM/yyyy HH:mm"}}</td>
+          <td>{{c.fine | date:"dd/MM/yyyy HH:mm"}}</td>
+          <td>
+            <svg type= button class="bi" width="26" height="26" fill="currentColor" (click)="editCourse(c)">
+              <use xlink:href="bootstrap-icons.svg#pencil-square"/>
+            </svg>
+          </td>
+          <td>
+            <svg type= button class="bi" width="26" height="26" fill="currentColor" (click)="deleteCourse(c)">
+              <use xlink:href="bootstrap-icons.svg#trash"/>
+            </svg>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
 <table class="table">
   <thead>
     <tr>
