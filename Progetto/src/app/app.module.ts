@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LoginResult } from './login/login-page/login-result.model';
 import { AppConstants } from './app.constants';
 import { PipePageComponent } from './pipes/pipe-page/pipe-page.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -67,6 +68,12 @@ export function tokenGetter() {
         allowedDomains: ['localhost:8080/progetto/rest']
         //disallowedRoutes: ["http://example.com/examplebadroute/"],
       },
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
     }),
   ],
   providers: [],
