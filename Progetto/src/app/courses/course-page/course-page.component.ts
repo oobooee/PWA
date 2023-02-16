@@ -49,21 +49,25 @@ export class CoursePageComponent implements OnInit, OnDestroy{
     console.log("ngOnINit coursepage component");
     this.getcourseSubscr = this.courseService.getAllCourses()?.subscribe(data => {
     this.courses = data;
+    this.feedback ={success:true, message: `Done. Data has been retrieved successfully`};
+    
   }, error => {
-    this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations`};
+    this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations. You are working with cashed data`};
   })
   }
   view_getAllCoursesBytitle(title: string): void{
     console.log("ngOnINit coursepage component");
       this.getcoursesbytitleSubscr = this.courseService.getAllCoursesBytitle(title)?.subscribe(data => {
       this.courses = data;
+      this.feedback ={success:true, message: `Done. Data has been retrieved successfully`};
   }, error => {
-    this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations`};
+    this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations, You are working with cashed data`};
   })
   }
   ngOnDestroy(): void {
      this.getcoursesbytitleSubscr?.unsubscribe();
      this.getcourseSubscr?.unsubscribe();
+    
   }
   search(){  
     const coursetitle: string = this.courseSearch.value.titolo;
@@ -73,6 +77,7 @@ export class CoursePageComponent implements OnInit, OnDestroy{
     this.view_getAllCoursesBytitle(coursetitle);
     //this.courseSearch.reset();
    // this.sendFeedback();
+   
 }
   refresh(){
     alert("Refresh !")
