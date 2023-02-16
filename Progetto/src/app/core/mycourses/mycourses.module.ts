@@ -4,23 +4,24 @@ import { CommonModule } from '@angular/common';
 import { MycoursesRoutingModule } from './mycourses-routing.module';
 
 import { MycoursesPageComponent } from './mycourses-page/mycourses-page.component';
-import { MycoursesComponent } from './mycourses/mycourses.component';
+
+
 
 
 @NgModule({
   declarations: [
-    MycoursesPageComponent,
-    MycoursesComponent
+    MycoursesPageComponent
   ],
   imports: [
     CommonModule,
-    MycoursesRoutingModule
+    MycoursesRoutingModule,
+
   ]
 })
-export class MycoursesModule { 
+export class MycoursesModule {
 
-  constructor(){
+  constructor() {
     console.log("MycoursesModule created")
-   }
+  }
 
 }

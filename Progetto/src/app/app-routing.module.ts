@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'pipes', component: PipePageComponent},
   { path: 'admin-ops', loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule), canLoad:[AuthGuardService] },
   { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canLoad:[AuthGuardService] },
-  { path: 'mycourses', loadChildren: () => import('./mycourses/mycourses.module').then(m => m.MycoursesModule),  canLoad:[AuthGuardServiceUser] },
+  { path: 'mycourses', loadChildren: () => import('./core/mycourses/mycourses.module').then(m => m.MycoursesModule),  canLoad:[AuthGuardServiceUser] },
   
 
 ];

@@ -1,0 +1,48 @@
+<div class="row">
+<div class="col-md-6">
+  <div class="row justify-content-center" *ngFor="let c of mycourses$ | async">
+    <div class="col-auto">
+        <div class="card" style="width: 20rem; margin-bottom: 10px">
+            <!-- <img [src]="m?.image?.medium" class="card-img-top" [alt]="m.name"> -->
+            <div class="card-body">
+              <h5 class="card-title" >{{ c.id_corso }}</h5>
+              <p class="card-text" [innerHTML]="c.titolo"></p>
+              <p class="card-text" >
+              <a class="btn btn-secondary btn-sm" (click)="getCourseDetails()" role="button">Details</a>
+            </p>
+                  <p class="card-text" >{{c.URL}}</p>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{mycourseDetails$}}</td>
+        
+        <td>
+         
+        </td>
+        <td>
+    
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+</div> 
+
+
+

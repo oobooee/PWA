@@ -20,6 +20,10 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LoginResult } from './login/login-page/login-result.model';
 import { AppConstants } from './app.constants';
 import { PipePageComponent } from './pipes/pipe-page/pipe-page.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { appReducers } from './store/app.reducers';
+import { MyCoursesEffects } from './core/mycourses/store/mycourses.effects';
 
 
 
@@ -68,6 +72,8 @@ export function tokenGetter() {
         //disallowedRoutes: ["http://example.com/examplebadroute/"],
       },
     }),
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot( [MyCoursesEffects] ),
   ],
   providers: [],
   bootstrap: [AppComponent]
