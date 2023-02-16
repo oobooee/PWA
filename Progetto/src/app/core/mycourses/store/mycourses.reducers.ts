@@ -35,7 +35,7 @@ export function mycourseDetailReducer(state = initialmyCourseDetailState,
         case EMyCoursesActions.SHOW_DETAIL:{
             return {
                 ...state,
-                id_corso: action.payload,
+                myCourseDetail: action.payload,
             }
         }
         default:
@@ -43,6 +43,7 @@ export function mycourseDetailReducer(state = initialmyCourseDetailState,
     }
 
 }
+
 
 
 

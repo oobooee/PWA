@@ -35,15 +35,16 @@ export class MyCoursesService {
        return  EMPTY;
    }
 
-   getCourseDetailService(id_corso?: number): Observable<MyCourseDetail> {
+   getCourseDetailService(c: MyCourses): Observable<MyCourses> {
     let login: LoginResult;
     let loginStr: string | null = localStorage.getItem(
       AppConstants.LOGIN_STORAGE
      );
      if (loginStr !== '' && loginStr !== null && loginStr !== undefined) {
        login = JSON.parse(loginStr);
-       const p = baseUrl.concat(login.username).concat("/docenze/").concat(String(id_corso));
+       const p = baseUrl.concat(login.username).concat("/docenze/").concat(String(c.id_corso));
        console.log(p)
+       console.log(this.httpClient.get<MyCourseDetail>(p))
        return this.httpClient.get<MyCourseDetail>(p);
        // return this.httpClient.get<MyCourses[]>(baseUrl);
       }

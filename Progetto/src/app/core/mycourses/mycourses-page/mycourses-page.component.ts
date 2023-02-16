@@ -15,7 +15,7 @@ import { MyCourseDetail } from '../model/MyCourseDetails';
 })
 export class MycoursesPageComponent implements OnInit {
   mycourses$?: Observable<MyCourses[]>;
-  mycourseDetails$?: Observable<MyCourseDetail>;
+  mycourseDetails$?: Observable<MyCourses>;
 
   constructor( private store: Store<IAppState>){
     this.mycourses$ = this.store.select(selectMyCoursesList);
@@ -28,10 +28,10 @@ export class MycoursesPageComponent implements OnInit {
     this.store.dispatch(new ShowAllAction());
   }
 
-  getCourseDetails(id_corso: number) {
-    this.store.dispatch(new ShowDetailAction(id_corso));
+  setCourseDetails(c: MyCourses) {
+    this.store.dispatch(new ShowDetailAction(c));
   }
-
+  
 }
 
 

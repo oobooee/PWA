@@ -7,6 +7,7 @@ import { MyCourses } from "../core/mycourses/model/MyCourses";
 export interface IAppState {
     myCoursesState: IMyCoursesState;
     myCourseDetailState: IMyCourseDetailState;
+
 }
 
 export interface IMyCoursesState {
@@ -14,10 +15,11 @@ export interface IMyCoursesState {
      message: any;
 }
 export interface IMyCourseDetailState {
-    myCourseDetail: MyCourseDetail;
-    id_corso: number | null| undefined;
+    myCourseDetail: MyCourses;
+    //id_corso: number | null| undefined;
      message: any;
 }
+
 
 
 export const initialmyCoursesState: IMyCoursesState = {
@@ -27,8 +29,9 @@ export const initialmyCoursesState: IMyCoursesState = {
 
 export const initialmyCourseDetailState: IMyCourseDetailState = {
     myCourseDetail: {},
-    id_corso: 0,
+   // id_corso: 0,
     message: null
 };
+
 
 

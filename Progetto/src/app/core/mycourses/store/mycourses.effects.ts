@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { switchMap, withLatestFrom } from 'rxjs/operators';
+import { exhaustMap, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Action, Store } from '@ngrx/store';
 import {
@@ -35,8 +35,8 @@ export class MyCoursesEffects {
   loadACourse$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
       ofType<ShowDetailAction>(EMyCoursesActions.SHOW_DETAIL),
-      switchMap(() => this.mycoursesService.getCourseDetailService()),
-      switchMap((mycoursdetailresp: MyCourseDetail) => 
+      switchMap((action) => this.mycoursesService.getCourseDetailService(action.payload)),
+      switchMap((mycoursdetailresp: MyCourses) => 
       of (new ShowDetailSuccessAction(mycoursdetailresp)))
     );
   });

@@ -21,12 +21,12 @@ export class ShowAllSuccessAction implements Action {
 }
 export class ShowDetailAction implements Action {
   readonly type = EMyCoursesActions.SHOW_DETAIL;
-  constructor(public payload: number) {}
+  constructor(public payload: MyCourses) {}
 }
 
 export class ShowDetailSuccessAction implements Action {
   readonly type = EMyCoursesActions.SHOW_DETAIL_SUCCESS;
-  constructor(public payload: MyCourseDetail) {}
+  constructor(public payload: MyCourses) {}
 }
 
 export class CreateAction implements Action {

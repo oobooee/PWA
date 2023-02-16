@@ -5,4 +5,5 @@ import { mycourseDetailReducer, mycoursesReducer } from '../core/mycourses/store
 export const appReducers: ActionReducerMap<IAppState, any> = {
    myCoursesState: mycoursesReducer,
    myCourseDetailState: mycourseDetailReducer,
+
 };
