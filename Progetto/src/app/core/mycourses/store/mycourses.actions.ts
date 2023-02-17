@@ -1,12 +1,17 @@
 import { Action } from '@ngrx/store';
 import { MyCourses } from '../model/MyCourses';
 import { MyCourseDetail } from '../model/MyCourseDetails';
+import { Teacher } from '../model/Teacher';
 
 export enum EMyCoursesActions {
   SHOW_ALL = '[MyCourses] Show All',
   SHOW_ALL_SUCCESS = '[MyCourses] Show All Success',
   SHOW_DETAIL =' [MyCourseDetail] Show detail ',
   SHOW_DETAIL_SUCCESS =' [MyCourseDetail] Show detail success',
+  ID = '[ID ] Show id success',
+  GET_TEACHER = '[Teacher ] Get teacher ',
+  GET_TEACHER_SUCCESS = '[Teacher ] Get teacher success',
+
   CREATE = '[MyCourses] Create',
   CREATE_SUCCESS = '[MyCourses] Create Success',
   CREATE_FAILURE = '[MyCourses] Create Failure'
@@ -21,13 +26,34 @@ export class ShowAllSuccessAction implements Action {
 }
 export class ShowDetailAction implements Action {
   readonly type = EMyCoursesActions.SHOW_DETAIL;
-  constructor(public payload: MyCourses) {}
+
 }
 
+export class ID implements Action {
+  readonly type = EMyCoursesActions.ID;
+  constructor(public payload: number) {}
+}
 export class ShowDetailSuccessAction implements Action {
   readonly type = EMyCoursesActions.SHOW_DETAIL_SUCCESS;
-  constructor(public payload: MyCourses) {}
+  constructor(public payload: MyCourseDetail) {}
 }
+
+
+export class GetTeacherAction implements Action {
+  readonly type = EMyCoursesActions.GET_TEACHER;
+  
+}
+export class GetTeacherSuccessAction implements Action {
+  readonly type = EMyCoursesActions.GET_TEACHER_SUCCESS;
+  constructor(public payload: Teacher) {}
+
+}
+
+
+
+
+
+
 
 export class CreateAction implements Action {
   readonly type = EMyCoursesActions.CREATE;
@@ -42,4 +68,4 @@ export class CreateFailureAction implements Action {
   constructor(public payload: any) {}
 }
 
-export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction;
+export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction;

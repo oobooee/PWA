@@ -1,35 +1,32 @@
 
 import { MyCourseDetail } from "../core/mycourses/model/MyCourseDetails";
 import { MyCourses } from "../core/mycourses/model/MyCourses";
+import { Teacher } from "../core/mycourses/model/Teacher";
 
 
 
-export interface IAppState {
-    myCoursesState: IMyCoursesState;
-    myCourseDetailState: IMyCourseDetailState;
+export interface AppState {
+    myCoursesState: MyCoursesState;
+   // myCourseDetailState: IMyCourseDetailState;
 
 }
 
-export interface IMyCoursesState {
+export interface MyCoursesState {
     myCourses: MyCourses[];
+    myCourseDetail: MyCourseDetail;
+    teacherDetails: Teacher;
+    id: number
      message: any;
 }
-export interface IMyCourseDetailState {
-    myCourseDetail: MyCourses;
-    //id_corso: number | null| undefined;
-     message: any;
-}
 
 
 
-export const initialmyCoursesState: IMyCoursesState = {
+
+export const initialmyCoursesState: MyCoursesState = {
     myCourses: [],
-    message: null
-};
-
-export const initialmyCourseDetailState: IMyCourseDetailState = {
     myCourseDetail: {},
-   // id_corso: 0,
+    teacherDetails: {},
+    id: 0,
     message: null
 };
 

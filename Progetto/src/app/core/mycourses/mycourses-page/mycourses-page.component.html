@@ -1,48 +1,109 @@
-<div class="row">
-<div class="col-md-6">
-  <div class="row justify-content-center" *ngFor="let c of mycourses$ | async">
-    <div class="col-auto">
-        <div class="card" style="width: 20rem; margin-bottom: 10px">
-            <!-- <img [src]="m?.image?.medium" class="card-img-top" [alt]="m.name"> -->
-            <div class="card-body">
-              <h5 class="card-title" >{{ c.id_corso }}</h5>
-              <p class="card-text" [innerHTML]="c.titolo"></p>
-              <p class="card-text" >
-              <a class="btn btn-secondary btn-sm" (click)="setCourseDetails(c)" role="button">Details</a>
-            </p>
-                  <p class="card-text" >{{c.URL}}</p>
-            </div>
-          </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+
+
+      <div  [ngStyle]="{'display':displayView}" class="card" *ngFor="let c of mycourses$ | async">
+        <!-- <img [src]="m?.image?.medium" class="card-img-top" [alt]="m.name"> -->
+        <div class="card-body">
+          <h5 class="card-title">Course ID: {{ c.id_corso }}</h5>
+          <p class="card-text"> Title: {{c.titolo}}</p>
+          <svg type=button class="bi" width="26" height="26" fill="currentColor"
+            (click)="setCourseDetails(c.id_corso!)">
+            <use xlink:href="bootstrap-icons.svg#zoom-in" />
+            Details:
+          </svg>
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="col-sm" >
+      One of three columns
+
+      <div class="card" *ngIf="(mycourseDetails$ |   async); let mycoursedetail" [ngStyle]="{'display':displayView}">
+        <!-- <img [src]="m?.image?.medium" class="card-img-top" [alt]="m.name"> -->
+        <div class="card-body">
+
+          <h4 class="card-text">{{mycoursedetail?.titolo}}</h4>
+          <p class="card-text">Total seats: {{mycoursedetail?.numPosti}}</p>
+          <p class="card-text">Available seats: {{mycoursedetail?.numPostiDisponibili}}</p>
+          <p class="card-text">Expected exam: {{mycoursedetail?.previstoEsame}}</p>
+          <p class="card-text">Price:{{mycoursedetail?.prezzo}}</p>
+          <p class="card-text">Start date: {{mycoursedetail?.inizio | date:"dd/MM/yyyy HH:mm"}}</p>
+          <p class="card-text">End date: {{mycoursedetail?.fine | date:"dd/MM/yyyy HH:mm"}}</p>
+          <p class="card-text">Credits: {{mycoursedetail?.crediti}}</p>
+          <p class="card-text">Total hours:{{mycoursedetail?.ore}}</p>
+          <p class="card-text">Description: {{mycoursedetail?.descrizione}}</p>
+          <p class="card-text">Language: {{mycoursedetail?.lingua}}</p>
+          <p class="card-text">Category: {{mycoursedetail?.categoria}}</p>
+          <svg type=button class="bi" width="26" height="26" fill="currentColor" (click)="enableForm()">
+            <use xlink:href="bootstrap-icons.svg#pen" />
+            Edit:
+          </svg>
+
+        </div>
+      </div>
+
+      <form [ngStyle]="{'display':display}" *ngIf="(mycourseDetails$ |   async); let mycoursedetail">
+        <div class="mb-3">
+          <input type="text" class="form-control" id="titolo" aria-describedby="titolo" value={{mycoursedetail?.titolo}} >
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="numPosti" aria-describedby="numPosti" value={{mycoursedetail?.numPosti}}>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="numPostiDisponibili" aria-describedby="numPostiDisponibili" value={{mycoursedetail?.numPostiDisponibili}} disabled>
+        </div>
+        <div class="mb-sm-2">
+          <input type="text" class="form-control" id="previstoEsame" aria-describedby="previstoEsame" value={{mycoursedetail?.previstoEsame}} disabled>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="prezzo" aria-describedby="prezzo" value={{mycoursedetail?.prezzo}} disabled>
+        </div>
+        <div class="mb-3">
+          <input type="datetime" class="form-control" id="inizio" aria-describedby="inizio"  value={{mycoursedetail?.inizio}} >
+        </div>
+        <div class="mb-3">
+          <input type="datetime" class="form-control" id="fine" aria-describedby="fine" value={{mycoursedetail?.fine}}>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="crediti" aria-describedby="crediti" value={{mycoursedetail?.crediti}}>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="ore" aria-describedby="ore" value={{mycoursedetail?.ore}}>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="descrizione" aria-describedby="descrizione" value={{mycoursedetail?.descrizione}}>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="lingua" aria-describedby="lingua" value={{mycoursedetail?.lingua}}>
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="categoria" aria-describedby="categoria" value={{mycoursedetail?.categoria}}>
+        </div>
+        <button type="submit" class="btn btn-danger" (click)="saveOnStore()">Save onn storage and disk</button>
+        <button type="submit" class="btn btn-secondary" (click)="disableForm()"> Back</button>
+      </form>
+
+    </div>
+    <div class="col-sm">
+      One of three columns
+      <div class="card" *ngIf="(teacherDetails$ |   async); let teacherDetails">
+        <svg class="bi" class="card-img-top" width="50" height="50" fill="green">
+          <use xlink:href="bootstrap-icons.svg#person-vcard" />
+        </svg>
+        <div class="card-body">
+          <h5 class="card-title">Your Username: {{teacherDetails?.username}}</h5>
+          <p class="card-text">Your userid: {{teacherDetails?.id_user}}</p>
+          <p class="card-text">Name: {{teacherDetails?.nome}}</p>
+          <p class="card-text">Surname: {{teacherDetails?.cognome}}</p>
+          <p class="card-text" type="email">Email: {{teacherDetails?.email}}</p>
+          
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-
-<div class="col-md-6">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">id</th>
-        <th scope="col">Title</th>
-        <th scope="col">Details</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{mycourseDetails$}}</td>
-        
-        <td>
-         
-        </td>
-        <td>
-    
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-</div> 
-
-
-

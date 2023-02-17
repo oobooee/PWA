@@ -1,9 +1,9 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { IAppState } from './app.states';
-import { mycourseDetailReducer, mycoursesReducer } from '../core/mycourses/store/mycourses.reducers';
+import { AppState } from './app.states';
+import { mycoursesReducer } from '../core/mycourses/store/mycourses.reducers';
 
-export const appReducers: ActionReducerMap<IAppState, any> = {
+export const appReducers: ActionReducerMap<AppState, any> = {
    myCoursesState: mycoursesReducer,
-   myCourseDetailState: mycourseDetailReducer,
+   //myCourseDetailState: mycourseDetailReducer,
 
 };

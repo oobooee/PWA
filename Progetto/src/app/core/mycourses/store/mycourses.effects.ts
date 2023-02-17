@@ -9,12 +9,16 @@ import {
   ShowAllSuccessAction,
   ShowDetailAction,
   ShowDetailSuccessAction,
+  ID,
+  GetTeacherAction,
+  GetTeacherSuccessAction,
 } from './mycourses.actions';
 
 
 import { MyCourses } from '../model/MyCourses';
 import { MyCoursesService } from '../service/mycourses.service';
 import { MyCourseDetail } from '../model/MyCourseDetails';
+import { Teacher } from '../model/Teacher';
 
 @Injectable()
 export class MyCoursesEffects {
@@ -34,10 +38,17 @@ export class MyCoursesEffects {
 
   loadACourse$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
-      ofType<ShowDetailAction>(EMyCoursesActions.SHOW_DETAIL),
+      ofType<ID>(EMyCoursesActions.ID),
       switchMap((action) => this.mycoursesService.getCourseDetailService(action.payload)),
-      switchMap((mycoursdetailresp: MyCourses) => 
-      of (new ShowDetailSuccessAction(mycoursdetailresp)))
+      switchMap((mycoursdetailresp: MyCourseDetail) => of (new ShowDetailSuccessAction(mycoursdetailresp)))
+    );
+  });
+
+  loadTeacher$: Observable<Action> = createEffect(() => {
+    return this.actions$.pipe(
+      ofType<GetTeacherAction>(EMyCoursesActions.GET_TEACHER),
+      switchMap(() => this.mycoursesService.getUserDetailsService()),
+      switchMap((teacherresp: Teacher) => of (new GetTeacherSuccessAction(teacherresp)))
     );
   });
 
