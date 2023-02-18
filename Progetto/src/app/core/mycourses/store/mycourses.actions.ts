@@ -11,6 +11,8 @@ export enum EMyCoursesActions {
   ID = '[ID ] Show id success',
   GET_TEACHER = '[Teacher ] Get teacher ',
   GET_TEACHER_SUCCESS = '[Teacher ] Get teacher success',
+  PATCH_COURSE = '[MyCourses ] Patch course ',
+  PATCH_COURSE_SUCCESS = '[MyCourses ] Patch course success',
 
   CREATE = '[MyCourses] Create',
   CREATE_SUCCESS = '[MyCourses] Create Success',
@@ -38,6 +40,14 @@ export class ShowDetailSuccessAction implements Action {
   constructor(public payload: MyCourseDetail) {}
 }
 
+export class PatchCourseAction implements Action{
+  readonly type = EMyCoursesActions.PATCH_COURSE;
+  constructor(public payload: MyCourseDetail){}
+}
+export class PatchCourseSuccessAction implements Action{
+  readonly type = EMyCoursesActions.PATCH_COURSE_SUCCESS;
+  constructor(public payload: number){}
+}
 
 export class GetTeacherAction implements Action {
   readonly type = EMyCoursesActions.GET_TEACHER;
@@ -48,12 +58,6 @@ export class GetTeacherSuccessAction implements Action {
   constructor(public payload: Teacher) {}
 
 }
-
-
-
-
-
-
 
 export class CreateAction implements Action {
   readonly type = EMyCoursesActions.CREATE;
@@ -68,4 +72,4 @@ export class CreateFailureAction implements Action {
   constructor(public payload: any) {}
 }
 
-export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction;
+export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction  | PatchCourseAction |PatchCourseSuccessAction;

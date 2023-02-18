@@ -29,6 +29,13 @@ export const selectTeacheDetails  = createSelector(
   }
 );
 
+export const selectMessageDetails  = createSelector(
+  selectMyState,
+  (state: MyCoursesState) => {
+    return state.message;
+  }
+);
+
 
 
 

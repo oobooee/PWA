@@ -67,5 +67,20 @@ export class MyCoursesService {
       }
        return  EMPTY;
    }
+
+   patchCourseService(c: MyCourseDetail): Observable<number>{
+    let login: LoginResult;
+    let loginStr: string | null = localStorage.getItem(
+      AppConstants.LOGIN_STORAGE
+     );
+     if (loginStr !== '' && loginStr !== null && loginStr !== undefined) {
+       login = JSON.parse(loginStr);
+       const p = baseUrl.concat(login.username).concat("/docenze/");
+      
+       return this.httpClient.patch<number>(p, c);
+       // return this.httpClient.get<MyCourses[]>(baseUrl);
+      }
+       return  EMPTY;
+   }
     
 }

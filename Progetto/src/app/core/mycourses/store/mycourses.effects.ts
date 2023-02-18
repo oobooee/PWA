@@ -12,6 +12,8 @@ import {
   ID,
   GetTeacherAction,
   GetTeacherSuccessAction,
+  PatchCourseAction,
+  PatchCourseSuccessAction,
 } from './mycourses.actions';
 
 
@@ -49,6 +51,14 @@ export class MyCoursesEffects {
       ofType<GetTeacherAction>(EMyCoursesActions.GET_TEACHER),
       switchMap(() => this.mycoursesService.getUserDetailsService()),
       switchMap((teacherresp: Teacher) => of (new GetTeacherSuccessAction(teacherresp)))
+    );
+  });
+
+  patchCourse$: Observable<Action> = createEffect(() => {
+    return this.actions$.pipe(
+      ofType<PatchCourseAction>(EMyCoursesActions.PATCH_COURSE),
+      switchMap((action) => this.mycoursesService.patchCourseService(action.payload)),
+      switchMap((patchedresp: number) => of (new PatchCourseSuccessAction(patchedresp)))
     );
   });
 

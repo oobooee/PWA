@@ -1,10 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
+      <h5>Course Lists</h5>
+      <div [ngStyle]="{'display':displayView}" class="card" *ngFor="let c of mycourses$ | async">
 
-
-      <div  [ngStyle]="{'display':displayView}" class="card" *ngFor="let c of mycourses$ | async">
-        <!-- <img [src]="m?.image?.medium" class="card-img-top" [alt]="m.name"> -->
         <div class="card-body">
           <h5 class="card-title">Course ID: {{ c.id_corso }}</h5>
           <p class="card-text"> Title: {{c.titolo}}</p>
@@ -19,14 +18,15 @@
 
 
     </div>
-    <div class="col-sm" >
-      One of three columns
+    <div class="col-sm">
+      <h5>Course Details</h5>
 
       <div class="card" *ngIf="(mycourseDetails$ |   async); let mycoursedetail" [ngStyle]="{'display':displayView}">
         <!-- <img [src]="m?.image?.medium" class="card-img-top" [alt]="m.name"> -->
         <div class="card-body">
-
+          <p class="card-text">id corso {{mycoursedetail?.id_corso}}</p>
           <h4 class="card-text">{{mycoursedetail?.titolo}}</h4>
+         
           <p class="card-text">Total seats: {{mycoursedetail?.numPosti}}</p>
           <p class="card-text">Available seats: {{mycoursedetail?.numPostiDisponibili}}</p>
           <p class="card-text">Expected exam: {{mycoursedetail?.previstoEsame}}</p>
@@ -38,7 +38,7 @@
           <p class="card-text">Description: {{mycoursedetail?.descrizione}}</p>
           <p class="card-text">Language: {{mycoursedetail?.lingua}}</p>
           <p class="card-text">Category: {{mycoursedetail?.categoria}}</p>
-          <svg type=button class="bi" width="26" height="26" fill="currentColor" (click)="enableForm()">
+          <svg type=button class="bi" width="26" height="26" fill="red" (click)="enableForm()">
             <use xlink:href="bootstrap-icons.svg#pen" />
             Edit:
           </svg>
@@ -46,49 +46,57 @@
         </div>
       </div>
 
-      <form [formGroup]="courseForm" [ngStyle]="{'display':display}" *ngIf="(mycourseDetails$ |   async); let mycoursedetail"  (ngSubmit)="saveOnStore()">
-        <label for="titolo"></label>
-        <div class="mb-3" class="form-group">
-          <input type="text" class="form-control" formControlName="titolo" id="titolo" aria-describedby="titolo" value={{mycoursedetail?.titolo}} >
+      <form [formGroup]="courseForm" [ngStyle]="{'display':display}"
+        *ngIf="(mycourseDetails$ |   async); let mycoursedetail" (ngSubmit)="saveOnStore()">
+        <div class="mb-3" class="form-group">Course ID
+          <input type="text" class="form-control" formControlName="id_corso" id="id_corso" aria-describedby="id_corso">
         </div>
-        <label for="numPosti"></label>
-        <div class="mb-3" class="form-group">
-          <input type="text" class="form-control" formControlName="numPosti" id="numPosti" aria-describedby="numPosti" value={{mycoursedetail?.numPosti}}>
+        <div class="mb-3" class="form-group">Title:
+          <input type="text" class="form-control" formControlName="titolo" id="titolo" aria-describedby="titolo">
         </div>
-        <label for="numPostiDisponibili"></label>
-        <div class="mb-3" class="form-group">
-          <input type="text" class="form-control" formControlName="numPostiDisponibili" id="numPostiDisponibili" aria-describedby="numPostiDisponibili" value={{mycoursedetail?.numPostiDisponibili}} >
+
+        <div class="mb-3" class="form-group">Total seats:
+          <input type="text" class="form-control" formControlName="numPosti" id="numPosti" aria-describedby="numPosti">
         </div>
-        <div class="mb-sm-2" class="form-group">
-          <input type="text" class="form-control" formControlName="previstoEsame" id="previstoEsame" aria-describedby="previstoEsame" value={{mycoursedetail?.previstoEsame}} >
+
+        <div class="mb-3" class="form-group">Available seats:
+          <input type="text" class="form-control" formControlName="numPostiDisponibili" id="numPostiDisponibili">
         </div>
-        <div class="mb-3" class="form-group">
-          <input type="text" class="form-control" formControlName="prezzo" id="prezzo" aria-describedby="prezzo" value={{mycoursedetail?.prezzo}} >
+        <div class="mb-sm-2" class="form-group">Expected exam:
+          <input type="text" class="form-control" formControlName="previstoEsame" id="previstoEsame">
         </div>
-        <div class="mb-3" class="form-group">
-          <input type="datetime" class="form-control" formControlName="inizio" id="inizio" aria-describedby="inizio"  value={{mycoursedetail?.inizio}} >
+        <div class="mb-3" class="form-group">Price:
+          <input type="text" class="form-control" formControlName="prezzo" id="prezzo" aria-describedby="prezzo">
         </div>
-        <div class="mb-3" class="form-group">
-          <input type="datetime" class="form-control" formControlName="fine" id="fine" aria-describedby="fine" value={{mycoursedetail?.fine}}>
+        <div class="mb-3" class="form-group">Start date:
+          <input type="datetime" class="form-control" formControlName="inizio" id="inizio" aria-describedby="inizio">
+
         </div>
-        <div class="mb-3" class="form-group">
-          <input type="text" class="form-control" formControlName="crediti" id="crediti" aria-describedby="crediti" value={{mycoursedetail?.crediti}}>
+        <div class="mb-3" class="form-group">End date:
+          <input type="datetime" class="form-control" formControlName="fine" id="fine" aria-describedby="fine">
         </div>
-        <div class="mb-3" class="form-group">
-          <input type="text" class="form-control" formControlName="ore" id="ore" aria-describedby="ore" value={{mycoursedetail?.ore}}>
+        <div class="mb-3" class="form-group">Credits:
+          <input type="text" class="form-control" formControlName="crediti" id="crediti" aria-describedby="crediti">
         </div>
-        <div class="mb-3" class="form-group">
-          <input type="text" class="form-control" formControlName="descrizione" id="descrizione" aria-describedby="descrizione" value={{mycoursedetail?.descrizione}}>
+        <div class="mb-3" class="form-group">Total hours:
+          <input type="text" class="form-control" formControlName="ore" id="ore" aria-describedby="ore">
         </div>
-        <div class="mb-3" class="form-group">
-          <input type="text" class="form-control" formControlName="lingua" id="lingua" aria-describedby="lingua" value={{mycoursedetail?.lingua}}>
+        <div class="mb-3" class="form-group">Description:
+          <input type="text" class="form-control" formControlName="descrizione" id="descrizione"
+            aria-describedby="descrizione">
         </div>
-        <div class="mb-3" class="form-group">
-          <input type="text" class="form-control" formControlName="categoria" id="categoria" aria-describedby="categoria" value={{mycoursedetail?.categoria}}>
+        <div class="mb-3" class="form-group">Language:
+          <input type="text" class="form-control" formControlName="lingua" id="lingua" aria-describedby="lingua">
         </div>
-        <button type="submit" class="btn btn-danger">Save onn storage and disk</button>
+        <div class="mb-3" class="form-group">Category:
+          <input type="text" class="form-control" formControlName="categoria" id="categoria"
+            aria-describedby="categoria">
+        </div>
+
+        <button type="submit" class="btn btn-danger" [disabled]="!courseForm.valid">Save onn storage and disk</button>
         <button type="reset" class="btn btn-secondary" (click)="disableForm()"> Back</button>
       </form>
+
 
     </div>
     <div class="col-sm">
@@ -103,11 +111,10 @@
           <p class="card-text">Name: {{teacherDetails?.nome}}</p>
           <p class="card-text">Surname: {{teacherDetails?.cognome}}</p>
           <p class="card-text" type="email">Email: {{teacherDetails?.email}}</p>
-          
+
         </div>
       </div>
 
     </div>
   </div>
 </div>
-

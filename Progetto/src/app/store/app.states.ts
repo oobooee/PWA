@@ -16,7 +16,7 @@ export interface MyCoursesState {
     myCourseDetail: MyCourseDetail;
     teacherDetails: Teacher;
     id: number
-     message: any;
+    message: any;
 }
 
 

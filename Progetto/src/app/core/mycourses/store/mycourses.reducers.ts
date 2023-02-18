@@ -24,7 +24,22 @@ export function mycoursesReducer(state = initialmyCoursesState,
                 ...state,
                 teacherDetails: action.payload
             };
+     
+        }
+        case EMyCoursesActions.PATCH_COURSE: {
+            return {
+                ...state,
+                myCourseDetail: action.payload
+            };
+     
+        }
 
+        case EMyCoursesActions.PATCH_COURSE_SUCCESS: {
+            return {
+                ...state,
+                message: action.payload
+            };
+     
         }
         default:
             return state;
