@@ -46,45 +46,48 @@
         </div>
       </div>
 
-      <form [ngStyle]="{'display':display}" *ngIf="(mycourseDetails$ |   async); let mycoursedetail">
-        <div class="mb-3">
-          <input type="text" class="form-control" id="titolo" aria-describedby="titolo" value={{mycoursedetail?.titolo}} >
+      <form [formGroup]="courseForm" [ngStyle]="{'display':display}" *ngIf="(mycourseDetails$ |   async); let mycoursedetail"  (ngSubmit)="saveOnStore()">
+        <label for="titolo"></label>
+        <div class="mb-3" class="form-group">
+          <input type="text" class="form-control" formControlName="titolo" id="titolo" aria-describedby="titolo" value={{mycoursedetail?.titolo}} >
         </div>
-        <div class="mb-3">
-          <input type="text" class="form-control" id="numPosti" aria-describedby="numPosti" value={{mycoursedetail?.numPosti}}>
+        <label for="numPosti"></label>
+        <div class="mb-3" class="form-group">
+          <input type="text" class="form-control" formControlName="numPosti" id="numPosti" aria-describedby="numPosti" value={{mycoursedetail?.numPosti}}>
         </div>
-        <div class="mb-3">
-          <input type="text" class="form-control" id="numPostiDisponibili" aria-describedby="numPostiDisponibili" value={{mycoursedetail?.numPostiDisponibili}} disabled>
+        <label for="numPostiDisponibili"></label>
+        <div class="mb-3" class="form-group">
+          <input type="text" class="form-control" formControlName="numPostiDisponibili" id="numPostiDisponibili" aria-describedby="numPostiDisponibili" value={{mycoursedetail?.numPostiDisponibili}} >
         </div>
-        <div class="mb-sm-2">
-          <input type="text" class="form-control" id="previstoEsame" aria-describedby="previstoEsame" value={{mycoursedetail?.previstoEsame}} disabled>
+        <div class="mb-sm-2" class="form-group">
+          <input type="text" class="form-control" formControlName="previstoEsame" id="previstoEsame" aria-describedby="previstoEsame" value={{mycoursedetail?.previstoEsame}} >
         </div>
-        <div class="mb-3">
-          <input type="text" class="form-control" id="prezzo" aria-describedby="prezzo" value={{mycoursedetail?.prezzo}} disabled>
+        <div class="mb-3" class="form-group">
+          <input type="text" class="form-control" formControlName="prezzo" id="prezzo" aria-describedby="prezzo" value={{mycoursedetail?.prezzo}} >
         </div>
-        <div class="mb-3">
-          <input type="datetime" class="form-control" id="inizio" aria-describedby="inizio"  value={{mycoursedetail?.inizio}} >
+        <div class="mb-3" class="form-group">
+          <input type="datetime" class="form-control" formControlName="inizio" id="inizio" aria-describedby="inizio"  value={{mycoursedetail?.inizio}} >
         </div>
-        <div class="mb-3">
-          <input type="datetime" class="form-control" id="fine" aria-describedby="fine" value={{mycoursedetail?.fine}}>
+        <div class="mb-3" class="form-group">
+          <input type="datetime" class="form-control" formControlName="fine" id="fine" aria-describedby="fine" value={{mycoursedetail?.fine}}>
         </div>
-        <div class="mb-3">
-          <input type="text" class="form-control" id="crediti" aria-describedby="crediti" value={{mycoursedetail?.crediti}}>
+        <div class="mb-3" class="form-group">
+          <input type="text" class="form-control" formControlName="crediti" id="crediti" aria-describedby="crediti" value={{mycoursedetail?.crediti}}>
         </div>
-        <div class="mb-3">
-          <input type="text" class="form-control" id="ore" aria-describedby="ore" value={{mycoursedetail?.ore}}>
+        <div class="mb-3" class="form-group">
+          <input type="text" class="form-control" formControlName="ore" id="ore" aria-describedby="ore" value={{mycoursedetail?.ore}}>
         </div>
-        <div class="mb-3">
-          <input type="text" class="form-control" id="descrizione" aria-describedby="descrizione" value={{mycoursedetail?.descrizione}}>
+        <div class="mb-3" class="form-group">
+          <input type="text" class="form-control" formControlName="descrizione" id="descrizione" aria-describedby="descrizione" value={{mycoursedetail?.descrizione}}>
         </div>
-        <div class="mb-3">
-          <input type="text" class="form-control" id="lingua" aria-describedby="lingua" value={{mycoursedetail?.lingua}}>
+        <div class="mb-3" class="form-group">
+          <input type="text" class="form-control" formControlName="lingua" id="lingua" aria-describedby="lingua" value={{mycoursedetail?.lingua}}>
         </div>
-        <div class="mb-3">
-          <input type="text" class="form-control" id="categoria" aria-describedby="categoria" value={{mycoursedetail?.categoria}}>
+        <div class="mb-3" class="form-group">
+          <input type="text" class="form-control" formControlName="categoria" id="categoria" aria-describedby="categoria" value={{mycoursedetail?.categoria}}>
         </div>
-        <button type="submit" class="btn btn-danger" (click)="saveOnStore()">Save onn storage and disk</button>
-        <button type="submit" class="btn btn-secondary" (click)="disableForm()"> Back</button>
+        <button type="submit" class="btn btn-danger">Save onn storage and disk</button>
+        <button type="reset" class="btn btn-secondary" (click)="disableForm()"> Back</button>
       </form>
 
     </div>
@@ -107,3 +110,4 @@
     </div>
   </div>
 </div>
+
