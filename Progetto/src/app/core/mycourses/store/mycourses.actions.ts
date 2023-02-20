@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 import { MyCourses } from '../model/MyCourses';
 import { MyCourseDetail } from '../model/MyCourseDetails';
 import { Teacher } from '../model/Teacher';
+import { HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 
 export enum EMyCoursesActions {
   SHOW_ALL = '[MyCourses] Show All',
@@ -12,7 +13,7 @@ export enum EMyCoursesActions {
   GET_TEACHER = '[Teacher ] Get teacher ',
   GET_TEACHER_SUCCESS = '[Teacher ] Get teacher success',
   PATCH_COURSE = '[MyCourses ] Patch course ',
-  PATCH_COURSE_SUCCESS = '[MyCourses ] Patch course success',
+  PATCH_COURSE_SUCCESS = '[HttpHeaderResponse ] Patch course success',
 
   CREATE = '[MyCourses] Create',
   CREATE_SUCCESS = '[MyCourses] Create Success',
@@ -46,7 +47,7 @@ export class PatchCourseAction implements Action{
 }
 export class PatchCourseSuccessAction implements Action{
   readonly type = EMyCoursesActions.PATCH_COURSE_SUCCESS;
-  constructor(public payload: number){}
+  constructor(public payload: HttpHeaderResponse[]){}
 }
 
 export class GetTeacherAction implements Action {

@@ -21,6 +21,7 @@ import { MyCourses } from '../model/MyCourses';
 import { MyCoursesService } from '../service/mycourses.service';
 import { MyCourseDetail } from '../model/MyCourseDetails';
 import { Teacher } from '../model/Teacher';
+import { HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 
 @Injectable()
 export class MyCoursesEffects {
@@ -58,7 +59,8 @@ export class MyCoursesEffects {
     return this.actions$.pipe(
       ofType<PatchCourseAction>(EMyCoursesActions.PATCH_COURSE),
       switchMap((action) => this.mycoursesService.patchCourseService(action.payload)),
-      switchMap((patchedresp: number) => of (new PatchCourseSuccessAction(patchedresp)))
+      switchMap((patchedresp: HttpHeaderResponse[]) => of (new PatchCourseSuccessAction(patchedresp)))
+      
     );
   });
 

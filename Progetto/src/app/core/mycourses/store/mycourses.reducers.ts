@@ -2,6 +2,7 @@ import * as fromActions from './mycourses.actions';
 import {  MyCoursesState,  initialmyCoursesState } from "src/app/store/app.states";
 
 import { EMyCoursesActions } from "./mycourses.actions";
+import { HttpHeaderResponse } from '@angular/common/http';
 
 export function mycoursesReducer(state = initialmyCoursesState,
     action: fromActions.ALL_REDUCER_ACTIONS): MyCoursesState {
@@ -37,7 +38,7 @@ export function mycoursesReducer(state = initialmyCoursesState,
         case EMyCoursesActions.PATCH_COURSE_SUCCESS: {
             return {
                 ...state,
-                message: action.payload
+                response: action.payload
             };
      
         }
