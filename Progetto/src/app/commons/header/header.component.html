@@ -16,7 +16,7 @@
             <a class="nav-link" routerLink="admin-ops">Courses</a>
           </li>
         </ul>
-        
+
         <ul class="nav navbar-nav navbar-right">
           <li class="nav-item">
             <a class="nav-link" routerLink="users">Users ops</a>
@@ -25,7 +25,7 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li class="nav-item">
-            <a class="nav-link" routerLink="mycourses" >My Courses</a>
+            <a class="nav-link" routerLink="mycourses">My Courses</a>
           </li>
         </ul>
 
@@ -50,22 +50,27 @@
             <a class="nav-link" routerLink="observables" [queryParams]="{'name': 'osserva'}">Observables</a>
           </li>
         </ul>
+
         <!-- <li class="nav-item">
           <a class="nav-link" routerLink="pipes">Pipes</a>
         </li> -->
         <li>
           <form class="d-flex" role="search">
-            <input class="form-control me-2"  type="search" placeholder="Catalog's search" aria-label="Search"
+            <input class="form-control me-2" type="search" placeholder="Catalog's search" aria-label="Search"
               [hidden]="isLogged()">
             <button class="btn btn-light " type="submit" [hidden]="isLogged()">Search</button>
           </form>
         </li>
+      </ul>
 
-
-        <!-- <li class="nav-item">
+      <!-- <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li> -->
+      <ul class="nav navbar-nav navbar-right text-light" [hidden]="!(isLogged() || isLoggedUser())"
+        *ngIf="(teacherDetails$ |   async); let teacherDetails">
+        <li> Welcome {{teacherDetails?.username}} 
       </ul>
+
       <ul class="nav navbar-nav navbar-right" [hidden]="isLogged() || isLoggedUser()">
         <svg type=button routerLink="login" class="bi" width="26" height="26" fill="white">
           <use xlink:href="bootstrap-icons.svg#person-circle" />
@@ -78,7 +83,7 @@
         </svg>
 
       </ul>
-     
+
     </div>
     <!-- <button type="button" class="btn btn-warning" (click)="logout()">Logout</button> -->
   </div>

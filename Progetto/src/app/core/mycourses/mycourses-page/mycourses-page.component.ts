@@ -74,7 +74,7 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
   }
   ngOnInit(): void {
     this.getAllCourses();
-    this.getUserDetails();
+    //this.getUserDetails();
     this.displayCreate ="none";
   }
 
@@ -85,9 +85,9 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
   getAllCourses() {
     this.store.dispatch(new ShowAllAction());
   }
-  getUserDetails(){
-    this.store.dispatch(new GetTeacherAction());
-  }
+  // getUserDetails(){
+  //   this.store.dispatch(new GetTeacherAction());
+  // }
   setCourseDetails(c: number) {
     
     this.store.dispatch(new ID(c));
