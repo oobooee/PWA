@@ -25,7 +25,7 @@ export class LoginPageComponent implements OnInit {
     //this.refresh();
   }
   ngOnInit(): void {
-    
+    this.refresh();
   }
 
   loginSubmit(){
@@ -39,6 +39,7 @@ export class LoginPageComponent implements OnInit {
              
       console.log(  `${JSON.stringify(res)}`);
       this.getUserDetails();
+      this.router.navigate(['mycourses']);
   }, (err: any) => {
     if (err instanceof HttpErrorResponse) {
       if (err.status !== 401) {
@@ -60,14 +61,14 @@ export class LoginPageComponent implements OnInit {
     this.display = "none";
   }
 
-  refresh(): void {
-    window.location.reload();
-}
+  
 getUserDetails(){
   this.store.dispatch(new GetTeacherAction());
   console.log(this.store)
 }
-
+refresh(): void {
+  window.location.reload;
+}
 
 }
 

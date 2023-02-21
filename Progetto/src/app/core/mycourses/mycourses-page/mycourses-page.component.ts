@@ -4,7 +4,7 @@ import { State, Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.states';
 import { Observable, Subscription, map } from 'rxjs';
 import {  draftedCourse, selectMessageDetails, selectMyCourseDetail, selectMyCoursesList, selectTeacheDetails } from '../store/mycourses.selector';
-import { CreateAction, GetTeacherAction, ID, PatchCourseAction, SaveOnStorage, SaveOnStorageSuccess, ShowAllAction, ShowDetailAction } from '../store/mycourses.actions';
+import { CreateAction, GetTeacherAction, ID, PatchCourseAction, ResetStorage, SaveOnStorage, SaveOnStorageSuccess, ShowAllAction, ShowDetailAction } from '../store/mycourses.actions';
 import { MyCourseDetail } from '../model/MyCourseDetails';
 import { OnReducer } from '@ngrx/store/src/reducer_creator';
 import { Teacher } from '../model/Teacher';
@@ -80,7 +80,7 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
 
   ngOnDestroy(){
     this.subscription1$?.unsubscribe();
-
+    this.store.dispatch(new ResetStorage());
   }
   getAllCourses() {
     this.store.dispatch(new ShowAllAction());

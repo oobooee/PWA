@@ -9,7 +9,7 @@ import { CourseService } from 'src/app/courses/course.service';
 
 
 export class HomePageComponent implements OnInit{
-  title = 'Progetto MWT Marco e Fabio';
+  title = 'Progetto MWT Angular Giarrusso Paolantonio';
   
   @ViewChild('openbutton')
   btn?:ElementRef

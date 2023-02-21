@@ -18,7 +18,8 @@ export enum EMyCoursesActions {
   SAVE_ON_STORAGE_SUCCESS =  '[MyCourseDetails] Saved On Storage',
   CREATE = '[MyCourses] Create',
   CREATE_SUCCESS = '[MyCourses] Create Success',
-  CREATE_FAILURE = '[MyCourses] Create Failure'
+  CREATE_FAILURE = '[MyCourses] Create Failure',
+  RESET_STORAGE = '[RESET STORAGE] Reset successful'
 }
 
 export class ShowAllAction implements Action {
@@ -51,6 +52,11 @@ export class PatchCourseSuccessAction implements Action{
   readonly type = EMyCoursesActions.PATCH_COURSE_SUCCESS;
   constructor(public payload: any[]){}
 }
+export class ResetStorage implements Action{
+  readonly type = EMyCoursesActions.RESET_STORAGE;
+  
+}
+
 
 export class GetTeacherAction implements Action {
   readonly type = EMyCoursesActions.GET_TEACHER;
@@ -89,4 +95,4 @@ export class CreateFailureAction implements Action {
   constructor(public payload: any) {}
 }
 
-export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction | PatchCourseAction |PatchCourseSuccessAction | SaveOnStorage |SaveOnStorageSuccess ;
+export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | ResetStorage |CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction | PatchCourseAction |PatchCourseSuccessAction | SaveOnStorage |SaveOnStorageSuccess ;

@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.closeModalMessage();
     this.router.navigate(['login']);
+    
   }
 
   hide(): void{

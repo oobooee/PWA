@@ -68,7 +68,7 @@
         </li> -->
       <ul class="nav navbar-nav navbar-right text-light" [hidden]="!(isLogged() || isLoggedUser())"
         *ngIf="(teacherDetails$ |   async); let teacherDetails">
-        <li> Welcome {{teacherDetails?.username}} 
+        <li> Welcome {{teacherDetails?.username}}     &nbsp;&nbsp;
       </ul>
 
       <ul class="nav navbar-nav navbar-right" [hidden]="isLogged() || isLoggedUser()">

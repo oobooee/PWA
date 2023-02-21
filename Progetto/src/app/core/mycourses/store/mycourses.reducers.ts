@@ -67,6 +67,19 @@ export function mycoursesReducer(state = initialmyCoursesState,
             };
 
         }
+        case EMyCoursesActions.RESET_STORAGE: {
+    
+            return {
+                myCourses: [],
+                myDraft: [],
+                myCourseDetail: {},
+                teacherDetails: {},
+                response: [],
+                id: 0,
+                message: null
+            };
+
+        }
 
 
 

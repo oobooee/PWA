@@ -5,8 +5,8 @@
       <div class="card" *ngFor="let c of mycourses$ | async">
 
         <div class="card-body">
-          <h5 class="card-title">Course ID: {{ c.id_corso }}</h5>
-          <p class="card-text"> Title: {{c.titolo}}</p>
+          <h6 class="card-title">Course ID: {{ c.id_corso }}</h6>
+          <h6 class="card-text"> Title: {{c.titolo}}</h6>
           <svg type=button class="bi" width="26" height="26" fill="currentColor"
             (click)="setCourseDetails(c.id_corso!)">
             <use xlink:href="bootstrap-icons.svg#zoom-in" />
@@ -26,8 +26,8 @@
       <div class="card" *ngIf="(mycourseDetails$ |   async); let mycoursedetail" [ngStyle]="{'display':displayView}">
         <!-- <img [src]="m?.image?.medium" class="card-img-top" [alt]="m.name"> -->
         <div class="card-body">
-          <p class="card-text">id corso {{mycoursedetail?.id_corso}}</p>
-          <h4 class="card-text">{{mycoursedetail?.titolo}}</h4>
+          <h5 class="card-text">Course ID:{{mycoursedetail?.id_corso}}</h5>
+          <h3 class="card-text">{{mycoursedetail?.titolo}}</h3>
 
           <p class="card-text">Total seats: {{mycoursedetail?.numPosti}}</p>
           <p class="card-text">Available seats: {{mycoursedetail?.numPostiDisponibili}}</p>
@@ -153,30 +153,35 @@
 
     </div>
     <div class="col-sm">
-      One of three columns
+      <h5>Your Profile</h5>
       <div class="card" *ngIf="(teacherDetails$ |   async); let teacherDetails">
         <svg class="bi" class="card-img-top" width="50" height="50" fill="green">
           <use xlink:href="bootstrap-icons.svg#person-vcard" />
         </svg>
         <div class="card-body">
-          <h5 class="card-title">Your Username: {{teacherDetails?.username}}</h5>
-          <p class="card-text">Your userid: {{teacherDetails?.id_user}}</p>
-          <p class="card-text">Name: {{teacherDetails?.nome}}</p>
-          <p class="card-text">Surname: {{teacherDetails?.cognome}}</p>
-          <p class="card-text" type="email">Email: {{teacherDetails?.email}}</p>
+          <h6>Your Username: </h6>
+          <h5 class="card-title">{{teacherDetails?.username}}</h5>
+          Your userid: 
+          <p class="card-text">{{teacherDetails?.id_user}}</p>
+          Name: 
+          <p class="card-text">{{teacherDetails?.nome}}</p>
+          Surname: 
+          <p class="card-text">{{teacherDetails?.cognome}}</p>
+          Email: 
+          <p class="card-text" type="email">{{teacherDetails?.email}}</p>
 
         </div>
       </div>
       <div class="col-sm">
         <br>
-        Course drafted.
-        <div class="card"*ngFor="let myd of myDraft$ | async">
-          <svg class="bi" class="card-img-top" width="50" height="50" fill="green">
-            <use xlink:href="bootstrap-icons.svg#draft" />
+        <!-- Course drafted. -->
+        <div class="card" *ngFor="let myd of myDraft$ | async">
+          <svg class="bi" class="card-img-left" width="32" height="32" fill="red">
+            <use xlink:href="bootstrap-icons.svg#clipboard2" />
           </svg>
-          <div class="card-body">
-            <p class="card-text">Titolo: {{myd?.titolo}}</p>          
-            <p class="card-text">Descrizione {{myd?.descrizione}}</p>   
+          <div class="draft">
+            <p class="draft">Titolo: {{myd?.titolo}}</p>          
+            <p class="draft">Descrizione: {{myd?.descrizione}}</p>   
 
           </div>
         </div>
@@ -184,7 +189,7 @@
       </div>
       <div class="col-sm">
         <br>
-        Errors
+        <!-- Errors -->
         <div class="card" *ngIf="errors$ | async as errors">
           <ul>
             <li *ngFor="let error of errors">
