@@ -36,6 +36,14 @@ export const selectMessageDetails  = createSelector(
   }
 );
 
+export const draftedCourse  = createSelector(
+  selectMyState,
+  (state: MyCoursesState) => {
+    return state.myDraft;
+  }
+);
+
+
 
 
 

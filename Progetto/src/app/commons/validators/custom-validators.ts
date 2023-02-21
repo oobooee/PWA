@@ -33,4 +33,12 @@ export class CustomValidators{
         ? { textFormatValidator:{valid:false, value: control.value}}
         :{};
     }
+
+    public static numbers(control: AbstractControl): ValidationErrors{
+        const TEXTREGEXP=/^[0-9].{0,10}$/
+        const error = !TEXTREGEXP.test(control.value);
+        return error
+        ? { textFormatValidator:{valid:false, value: control.value}}
+        :{};
+    }
 }

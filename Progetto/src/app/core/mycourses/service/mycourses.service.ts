@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { HttpClient, HttpHeaderResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 
 import { MyCourses } from '../model/MyCourses';
 import { LoginResult } from 'src/app/login/login-page/login-result.model';
@@ -17,8 +17,7 @@ const baseUrl = 'http://172.18.0.110:8080/progetto/rest/utenti/';
 })
 export class MyCoursesService {
 
-  pippo?: Observable<HttpHeaderResponse[]>;
-  constructor(private httpClient: HttpClient) { 
+   constructor(private httpClient: HttpClient) { 
    
   }
 
@@ -73,13 +72,30 @@ export class MyCoursesService {
      );
      if (loginStr !== '' && loginStr !== null && loginStr !== undefined) {
        login = JSON.parse(loginStr);
-       const p = baseUrl.concat(login.username).concat("/docenze/");
-        
-       return this.httpClient.patch<HttpHeaderResponse[]>(p, c);
+       const p = baseUrl.concat(login.username).concat("/docenze/");  
+       return this.httpClient.patch<HttpHeaderResponse[]>(p, c) ;
 
       }
        return  EMPTY;
    }
+
+   addCourseService(c: MyCourseDetail): Observable<MyCourseDetail>{
+    let login: LoginResult;
+    let loginStr: string | null = localStorage.getItem(
+      AppConstants.LOGIN_STORAGE
+     );
+     if (loginStr !== '' && loginStr !== null && loginStr !== undefined) {
+       login = JSON.parse(loginStr);
+       const p = baseUrl.concat(login.username).concat("/docenze/");  
+       return this.httpClient.post<MyCourseDetail>(p, c) ;
+
+      }
+       return  EMPTY;
+   }
+
+   
+
+
 
    
     

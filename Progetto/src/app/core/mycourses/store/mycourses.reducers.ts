@@ -1,5 +1,5 @@
 import * as fromActions from './mycourses.actions';
-import {  MyCoursesState,  initialmyCoursesState } from "src/app/store/app.states";
+import { MyCoursesState, initialmyCoursesState } from "src/app/store/app.states";
 
 import { EMyCoursesActions } from "./mycourses.actions";
 import { HttpHeaderResponse } from '@angular/common/http';
@@ -25,14 +25,14 @@ export function mycoursesReducer(state = initialmyCoursesState,
                 ...state,
                 teacherDetails: action.payload
             };
-     
+
         }
         case EMyCoursesActions.PATCH_COURSE: {
             return {
                 ...state,
                 myCourseDetail: action.payload
             };
-     
+
         }
 
         case EMyCoursesActions.PATCH_COURSE_SUCCESS: {
@@ -40,8 +40,36 @@ export function mycoursesReducer(state = initialmyCoursesState,
                 ...state,
                 response: action.payload
             };
-     
+
         }
+
+        case EMyCoursesActions.CREATE_SUCCESS: {
+            return {
+                ...state,
+                myCourseDetail: action.payload
+            };
+
+        }
+
+        case EMyCoursesActions.SAVE_ON_STORAGE: {
+            return {
+                ...state,
+                myDraft: action.payload
+            };
+
+        }
+
+        case EMyCoursesActions.SAVE_ON_STORAGE_SUCCESS: {
+    
+            return {
+                ...state,
+               myDraft: action.payload
+            };
+
+        }
+
+
+
         default:
             return state;
     }

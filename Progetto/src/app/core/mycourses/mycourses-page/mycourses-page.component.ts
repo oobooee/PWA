@@ -1,14 +1,14 @@
-import { Component, Input, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, Input, LOCALE_ID, OnDestroy, OnInit } from '@angular/core';
 import { MyCourses } from '../model/MyCourses';
 import { State, Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.states';
-import { Observable, map } from 'rxjs';
-import { selectMessageDetails, selectMyCourseDetail, selectMyCoursesList, selectTeacheDetails } from '../store/mycourses.selector';
-import { GetTeacherAction, ID, PatchCourseAction, ShowAllAction, ShowDetailAction } from '../store/mycourses.actions';
+import { Observable, Subscription, map } from 'rxjs';
+import {  draftedCourse, selectMessageDetails, selectMyCourseDetail, selectMyCoursesList, selectTeacheDetails } from '../store/mycourses.selector';
+import { CreateAction, GetTeacherAction, ID, PatchCourseAction, SaveOnStorage, SaveOnStorageSuccess, ShowAllAction, ShowDetailAction } from '../store/mycourses.actions';
 import { MyCourseDetail } from '../model/MyCourseDetails';
 import { OnReducer } from '@ngrx/store/src/reducer_creator';
 import { Teacher } from '../model/Teacher';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/commons/validators/custom-validators';
 import { Title } from '@angular/platform-browser';
 import { __values } from 'tslib';
@@ -23,43 +23,49 @@ import { MycoursesRoutingModule } from '../mycourses-routing.module';
   styleUrls: ['./mycourses-page.component.css'],
   
 })
-export class MycoursesPageComponent implements OnInit {
+export class MycoursesPageComponent implements OnInit , OnDestroy{
 
   mycourses$?: Observable<MyCourses[]>;
   mycourseDetails$?: Observable<MyCourseDetail>;
   teacherDetails$?: Observable<Teacher>;
   response$?: Observable<HttpHeaderResponse[]>; 
+  errors$?: Observable<any>;
+  myDraft$?: Observable<MyCourseDetail[]>;
   display:string = "none";
   displayView: string ="";
   displayCreate: string ="";
   courseForm: FormGroup;
   c?: MyCourseDetail;
   courses?: MyCourses[];
+  draftedCourses?: MyCourseDetail[];
 
   @Input()   
   courseDetail?: MyCourseDetail;
+  subscription1$: Subscription | undefined;
 
 
   constructor( private store: Store<AppState>, private form: FormBuilder){
     this.mycourses$ = this.store.select(selectMyCoursesList);
     console.log(this.mycourses$)
+    //this.draftedCourses = [];
     this.teacherDetails$ = this.store.select(selectTeacheDetails);
+    this.myDraft$ = this.store.select(draftedCourse);
     this.courseForm = this.form.group(
       { 
        // title: ['', [Validators.required]],
       // id_corso:[,[]],
-       id_corso: { disabled:false},
-       titolo: [{value:''}, Validators.minLength(4),],
+       id_corso:  [{value:'', disabled:true}, [CustomValidators.totalempty]] ,
+       titolo: ['', Validators.minLength(4),],
        numPosti: ['', [CustomValidators.totalempty]] ,
-       numPostiDisponibili: [{value:'', disabled:false}, [CustomValidators.totalempty]] ,
-       previstoEsame: [, [CustomValidators.totalempty]] ,
-       prezzo: [, [CustomValidators.totalempty]] ,
-       inizio: [, [CustomValidators.totalempty]] ,
-       fine: [, [CustomValidators.totalempty]] ,
-       crediti: [, [CustomValidators.totalempty]], 
-       ore: [, [CustomValidators.totalempty]] ,
-       descrizione: [, [CustomValidators.totalempty]] ,
-       lingua: [, [CustomValidators.totalempty]] ,
+       numPostiDisponibili: [{value:'', disabled:true}, [CustomValidators.totalempty]] ,
+       previstoEsame: ['', [CustomValidators.totalempty]] ,
+       prezzo: ['', [CustomValidators.totalempty]] ,
+       inizio: [{value:'', disabled:true}, [CustomValidators.totalempty]] ,
+       fine: [{value:'', disabled:true}, [CustomValidators.totalempty]] ,
+       crediti: ['', [CustomValidators.totalempty]], 
+       ore: ['', [CustomValidators.totalempty]] ,
+       descrizione: ['', [CustomValidators.totalempty]] ,
+       lingua: ['', [CustomValidators.totalempty]] ,
        categoria: ['', [CustomValidators.totalempty]] ,
        
        },
@@ -70,6 +76,11 @@ export class MycoursesPageComponent implements OnInit {
     this.getAllCourses();
     this.getUserDetails();
     this.displayCreate ="none";
+  }
+
+  ngOnDestroy(){
+    this.subscription1$?.unsubscribe();
+
   }
   getAllCourses() {
     this.store.dispatch(new ShowAllAction());
@@ -85,22 +96,46 @@ export class MycoursesPageComponent implements OnInit {
   
   }
   saveOnStore(){
-    console.log("click");
-    const courseFormAcquired: MyCourseDetail = this.courseForm.value;
+    const courseFormAcquired: MyCourseDetail = this.courseForm.getRawValue();
     console.log(JSON.stringify(courseFormAcquired));
     this.store.dispatch(new PatchCourseAction(courseFormAcquired))
+    this.response$ = this.store.select(selectMessageDetails);
+    console.log("---------------")
+    console.log(this.response$)
+    console.log("---------------")
+  }
+  saveOndDB(){
+    console.log("save on db");
+    this.courseForm.reset;
+    const courseFormAcquired: MyCourseDetail = this.courseForm.getRawValue();
+    this.store.dispatch(new CreateAction(courseFormAcquired))
     this.refresh();
   }
-
-  saveOnStoreAndDB(){
-    const courseFormAcquired: MyCourseDetail = this.courseForm.value;
+  
+  saveOnStorage(){
+    console.log("save on local storage");
+    const courseFormAcquired: MyCourseDetail = this.courseForm.getRawValue();
+    console.log(courseFormAcquired)
+    this.subscription1$ = this.myDraft$?.subscribe((corsi: MyCourseDetail[]) => this.draftedCourses = corsi)
+    
+    this.draftedCourses = JSON.parse(JSON.stringify(this.draftedCourses));
+    this.draftedCourses!.push(courseFormAcquired);
+    console.log(this.draftedCourses)
+    this.store.dispatch(new SaveOnStorageSuccess(this.draftedCourses!))
+    this.myDraft$ = this.store.select(draftedCourse);
+    console.log(this.myDraft$);
+    
   }
+  
+
+  
 
   enableForm(){
+    this.courseForm.reset;
     this.display = "block";
     this.displayView = "none";
     this.displayCreate ="none";
-    this.mycourseDetails$?.subscribe((course: MyCourseDetail) => this.courseDetail = course)
+    this.subscription1$ = this.mycourseDetails$?.subscribe((course: MyCourseDetail) => this.courseDetail = course)
    
     this.courseForm.patchValue({
       id_corso: this.courseDetail?.id_corso,
@@ -124,26 +159,49 @@ export class MycoursesPageComponent implements OnInit {
     
   }
   disableForm(){
+    this.courseForm.reset;
     this.display = "none";
     this.displayView = "block";
     this.displayCreate ="none";
   }
 
   refresh(): void{
-    console.log(this.store);
+    this.courseForm.reset;
     this.display = "none";
     this.displayView = "none";
     this.displayCreate ="none";
   }
 
   createForm(){
-    this.courseForm.reset();
+    this.courseForm.reset;
+    this.courseForm = this.form.group(
+      { 
+      id_corso:  [{value:this.getnextfromserver(), disabled:true}, [CustomValidators.numbers]] ,
+       titolo: ['', Validators.minLength(4),],
+       numPosti: ['', [CustomValidators.numbers]] ,
+       numPostiDisponibili: [{value:'', disabled:false}, [CustomValidators.numbers]] ,
+       previstoEsame: ['', [CustomValidators.totalempty, ]] ,
+       prezzo: ['', [CustomValidators.numbers]] ,
+       inizio: [{value:'', disabled:false}, [CustomValidators.totalempty]] ,
+       fine: [{value:'', disabled:false}, [CustomValidators.totalempty]] ,
+       crediti: ['', [CustomValidators.numbers]], 
+       ore: ['', [CustomValidators.numbers]] ,
+       descrizione: ['', [CustomValidators.totalempty]] ,
+       lingua: ['', [CustomValidators.totalempty]] ,
+       categoria: ['', [CustomValidators.totalempty]] ,
+    })
+    
     this.display = "none";
     this.displayView = "none";
     this.displayCreate ="block";
-
-  
 }
+
+
+getnextfromserver(){
+  let max: number = 10000;
+  return Math.floor(Math.random() * max);
+}
+
 
 
 }

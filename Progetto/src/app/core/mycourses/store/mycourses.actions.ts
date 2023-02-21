@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { MyCourses } from '../model/MyCourses';
 import { MyCourseDetail } from '../model/MyCourseDetails';
 import { Teacher } from '../model/Teacher';
-import { HttpHeaderResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 
 export enum EMyCoursesActions {
   SHOW_ALL = '[MyCourses] Show All',
@@ -14,7 +14,8 @@ export enum EMyCoursesActions {
   GET_TEACHER_SUCCESS = '[Teacher ] Get teacher success',
   PATCH_COURSE = '[MyCourses ] Patch course ',
   PATCH_COURSE_SUCCESS = '[HttpHeaderResponse ] Patch course success',
-
+  SAVE_ON_STORAGE = ' [MyCourseDetailssssss] Save On Storage',
+  SAVE_ON_STORAGE_SUCCESS =  '[MyCourseDetails] Saved On Storage',
   CREATE = '[MyCourses] Create',
   CREATE_SUCCESS = '[MyCourses] Create Success',
   CREATE_FAILURE = '[MyCourses] Create Failure'
@@ -32,6 +33,7 @@ export class ShowDetailAction implements Action {
 
 }
 
+
 export class ID implements Action {
   readonly type = EMyCoursesActions.ID;
   constructor(public payload: number) {}
@@ -47,7 +49,7 @@ export class PatchCourseAction implements Action{
 }
 export class PatchCourseSuccessAction implements Action{
   readonly type = EMyCoursesActions.PATCH_COURSE_SUCCESS;
-  constructor(public payload: HttpHeaderResponse[]){}
+  constructor(public payload: any[]){}
 }
 
 export class GetTeacherAction implements Action {
@@ -60,17 +62,31 @@ export class GetTeacherSuccessAction implements Action {
 
 }
 
+export class SaveOnStorage implements Action {
+  readonly type = EMyCoursesActions.SAVE_ON_STORAGE;
+  constructor(public payload: MyCourseDetail[]) {}
+}
+
+export class SaveOnStorageSuccess implements Action {
+  readonly type = EMyCoursesActions.SAVE_ON_STORAGE_SUCCESS;
+  constructor(public payload: MyCourseDetail[]) {}
+}
+
+export class AddErrors implements Action {
+  readonly type = EMyCoursesActions.SAVE_ON_STORAGE_SUCCESS;
+  constructor(public payload: HttpErrorResponse[]) {}
+}
 export class CreateAction implements Action {
   readonly type = EMyCoursesActions.CREATE;
-  constructor(public payload: MyCourses) {}
+  constructor(public payload: MyCourseDetail) {}
 }
 export class CreateSuccessAction implements Action {
   readonly type = EMyCoursesActions.CREATE_SUCCESS;
-  constructor(public payload: MyCourses) {}
+  constructor(public payload: MyCourseDetail) {}
 }
 export class CreateFailureAction implements Action {
   readonly type = EMyCoursesActions.CREATE_FAILURE;
   constructor(public payload: any) {}
 }
 
-export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction  | PatchCourseAction |PatchCourseSuccessAction;
+export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction | PatchCourseAction |PatchCourseSuccessAction | SaveOnStorage |SaveOnStorageSuccess ;

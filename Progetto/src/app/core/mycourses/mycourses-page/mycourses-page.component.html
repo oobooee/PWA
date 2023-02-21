@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm">
       <h5>Course Lists</h5>
-      <div  class="card" *ngFor="let c of mycourses$ | async">
+      <div class="card" *ngFor="let c of mycourses$ | async">
 
         <div class="card-body">
           <h5 class="card-title">Course ID: {{ c.id_corso }}</h5>
@@ -15,7 +15,8 @@
         </div>
       </div>
       <br>
-      <button type="submit" class="btn btn-primary" (click)="createForm()">Create a new Course</button>
+      <button class="btn btn-primary" (click)="createForm()">Create a new Course</button>
+
     </div>
 
 
@@ -27,7 +28,7 @@
         <div class="card-body">
           <p class="card-text">id corso {{mycoursedetail?.id_corso}}</p>
           <h4 class="card-text">{{mycoursedetail?.titolo}}</h4>
-         
+
           <p class="card-text">Total seats: {{mycoursedetail?.numPosti}}</p>
           <p class="card-text">Available seats: {{mycoursedetail?.numPostiDisponibili}}</p>
           <p class="card-text">Expected exam: {{mycoursedetail?.previstoEsame}}</p>
@@ -93,59 +94,62 @@
           <input type="text" class="form-control" formControlName="categoria" id="categoria"
             aria-describedby="categoria">
         </div>
-
-        <button type="submit" id="editbutton" class="btn btn-danger" [disabled]="!courseForm.valid">Save on storage and disk</button>
+        <button type="submit" id="editbutton" class="btn btn-danger" [disabled]="!courseForm.valid">Save on storage and
+          disk</button>
         <button type="reset" class="btn btn-secondary" (click)="disableForm()"> Back</button>
       </form>
 
-      <form [formGroup]="courseForm" [ngStyle]="{'display':displayCreate}" (ngSubmit)="saveOnStoreAndDB()">
-      <div class="mb-3" class="form-group">Course ID
-        <input type="text" class="form-control" formControlName="id_corso" id="id_corso" aria-describedby="id_corso">
-      </div>
-      <div class="mb-3" class="form-group">Title:
-        <input type="text" class="form-control" formControlName="titolo" id="titolo" aria-describedby="titolo">
-      </div>
-      <div class="mb-3" class="form-group">Total seats:
-        <input type="text" class="form-control" formControlName="numPosti" id="numPosti" aria-describedby="numPosti">
-      </div>
+      <form [formGroup]="courseForm" [ngStyle]="{'display':displayCreate}" >
+        <div class="mb-3" class="form-group">Course ID
+          <input type="text" class="form-control" formControlName="id_corso" id="id_corso" aria-describedby="id_corso">
+        </div>
+        <div class="mb-3" class="form-group">Title:
+          <input type="text" class="form-control" formControlName="titolo" id="titolo" aria-describedby="titolo">
+        </div>
+        <div class="mb-3" class="form-group">Total seats:
+          <input type="text" class="form-control" formControlName="numPosti" id="numPosti" aria-describedby="numPosti">
+        </div>
 
-      <div class="mb-3" class="form-group">Available seats:
-        <input type="text" class="form-control" formControlName="numPostiDisponibili" id="numPostiDisponibili">
-      </div>
-      <div class="mb-sm-2" class="form-group">Expected exam:
-        <input type="text" class="form-control" formControlName="previstoEsame" id="previstoEsame">
-      </div>
-      <div class="mb-3" class="form-group">Price:
-        <input type="text" class="form-control" formControlName="prezzo" id="prezzo" aria-describedby="prezzo">
-      </div>
-      <div class="mb-3" class="form-group">Start date:
-        <input type="datetime" class="form-control" formControlName="inizio" id="inizio" aria-describedby="inizio">
+        <div class="mb-3" class="form-group">Available seats:
+          <input type="text" class="form-control" formControlName="numPostiDisponibili" id="numPostiDisponibili">
+        </div>
+        <div class="mb-sm-2" class="form-group">Expected exam:
+          <input type="text" class="form-control" formControlName="previstoEsame" id="previstoEsame">
+        </div>
+        <div class="mb-3" class="form-group">Price:
+          <input type="text" class="form-control" formControlName="prezzo" id="prezzo" aria-describedby="prezzo">
+        </div>
+        <div class="mb-3" class="form-group">Start date:
+          <input type="datetime" class="form-control" formControlName="inizio" id="inizio" aria-describedby="inizio">
 
-      </div>
-      <div class="mb-3" class="form-group">End date:
-        <input type="datetime" class="form-control" formControlName="fine" id="fine" aria-describedby="fine">
-      </div>
-      <div class="mb-3" class="form-group">Credits:
-        <input type="text" class="form-control" formControlName="crediti" id="crediti" aria-describedby="crediti">
-      </div>
-      <div class="mb-3" class="form-group">Total hours:
-        <input type="text" class="form-control" formControlName="ore" id="ore" aria-describedby="ore">
-      </div>
-      <div class="mb-3" class="form-group">Description:
-        <input type="text" class="form-control" formControlName="descrizione" id="descrizione"
-          aria-describedby="descrizione">
-      </div>
-      <div class="mb-3" class="form-group">Language:
-        <input type="text" class="form-control" formControlName="lingua" id="lingua" aria-describedby="lingua">
-      </div>
-      <div class="mb-3" class="form-group">Category:
-        <input type="text" class="form-control" formControlName="categoria" id="categoria"
-          aria-describedby="categoria">
-      </div>
-      <br>
-      <button type="submit" id="createbutton" class="btn btn-danger" [disabled]="!courseForm.valid">Save on storage and disk</button>  
-      <button type="reset" class="btn btn-secondary" (click)="disableForm()"> Back</button>
-    </form>
+        </div>
+        <div class="mb-3" class="form-group">End date:
+          <input type="datetime" class="form-control" formControlName="fine" id="fine" aria-describedby="fine">
+        </div>
+        <div class="mb-3" class="form-group">Credits:
+          <input type="text" class="form-control" formControlName="crediti" id="crediti" aria-describedby="crediti">
+        </div>
+        <div class="mb-3" class="form-group">Total hours:
+          <input type="text" class="form-control" formControlName="ore" id="ore" aria-describedby="ore">
+        </div>
+        <div class="mb-3" class="form-group">Description:
+          <input type="text" class="form-control" formControlName="descrizione" id="descrizione"
+            aria-describedby="descrizione">
+        </div>
+        <div class="mb-3" class="form-group">Language:
+          <input type="text" class="form-control" formControlName="lingua" id="lingua" aria-describedby="lingua">
+        </div>
+        <div class="mb-3" class="form-group">Category:
+          <input type="text" class="form-control" formControlName="categoria" id="categoria"
+            aria-describedby="categoria">
+        </div>
+        <br>
+        <button type="submit" id="createbutton" class="btn btn-primary btn-sm" [disabled]="!courseForm.valid" (click)="saveOndDB()">Save and submit </button>
+        &nbsp;
+        <button id="savedraft" class="btn btn-warning btn-sm" [disabled]="!courseForm.valid" (click)="saveOnStorage()">Save
+          draft</button>&nbsp;
+        <button type="reset" class="btn btn-info btn-sm" (click)="disableForm()"> Back</button>
+      </form>
 
     </div>
     <div class="col-sm">
@@ -161,6 +165,32 @@
           <p class="card-text">Surname: {{teacherDetails?.cognome}}</p>
           <p class="card-text" type="email">Email: {{teacherDetails?.email}}</p>
 
+        </div>
+      </div>
+      <div class="col-sm">
+        <br>
+        Course drafted.
+        <div class="card"*ngFor="let myd of myDraft$ | async">
+          <svg class="bi" class="card-img-top" width="50" height="50" fill="green">
+            <use xlink:href="bootstrap-icons.svg#draft" />
+          </svg>
+          <div class="card-body">
+            <p class="card-text">Titolo: {{myd?.titolo}}</p>          
+            <p class="card-text">Descrizione {{myd?.descrizione}}</p>   
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm">
+        <br>
+        Errors
+        <div class="card" *ngIf="errors$ | async as errors">
+          <ul>
+            <li *ngFor="let error of errors">
+              {{error}}
+            </li>
+          </ul>
         </div>
       </div>
 
