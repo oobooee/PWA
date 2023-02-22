@@ -13,7 +13,7 @@ import { CustomValidators } from 'src/app/commons/validators/custom-validators';
 import { Title } from '@angular/platform-browser';
 import { __values } from 'tslib';
 import { DatePipe, formatDate } from '@angular/common';
-import { HttpHeaderResponse } from '@angular/common/http';
+import { HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MycoursesRoutingModule } from '../mycourses-routing.module';
 
@@ -28,7 +28,7 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
   mycourses$?: Observable<MyCourses[]>;
   mycourseDetails$?: Observable<MyCourseDetail>;
   teacherDetails$?: Observable<Teacher>;
-  response$?: Observable<HttpHeaderResponse[]>; 
+  response$?: Observable<any>; 
   errors$?: Observable<any>;
   myDraft$?: Observable<MyCourseDetail[]>;
   display:string = "none";
@@ -38,10 +38,11 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
   c?: MyCourseDetail;
   courses?: MyCourses[];
   draftedCourses?: MyCourseDetail[];
+  subscription1$: Subscription | undefined;
 
   @Input()   
   courseDetail?: MyCourseDetail;
-  subscription1$: Subscription | undefined;
+  
 
 
   constructor( private store: Store<AppState>, private form: FormBuilder){
@@ -80,7 +81,7 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
 
   ngOnDestroy(){
     this.subscription1$?.unsubscribe();
-    this.store.dispatch(new ResetStorage());
+    
   }
   getAllCourses() {
     this.store.dispatch(new ShowAllAction());
@@ -95,13 +96,16 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
   
   
   }
-  saveOnStore(){
+  patchOnStore(){
     const courseFormAcquired: MyCourseDetail = this.courseForm.getRawValue();
     console.log(JSON.stringify(courseFormAcquired));
     this.store.dispatch(new PatchCourseAction(courseFormAcquired))
-    this.response$ = this.store.select(selectMessageDetails);
+    //this.subscription1$ = this.store.select(selectMessageDetails).subscribe(resp => {console.log(resp)});
+    this.response$ = this.store.select(selectMessageDetails)
+    this.refresh();
     console.log("---------------")
     console.log(this.response$)
+    //console.log(this.subscription1$)
     console.log("---------------")
   }
   saveOndDB(){

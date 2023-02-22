@@ -67,7 +67,7 @@ export class MyCoursesEffects {
     return this.actions$.pipe(
       ofType<PatchCourseAction>(EMyCoursesActions.PATCH_COURSE),
       switchMap((action) => this.mycoursesService.patchCourseService(action.payload)),
-      switchMap((patchedresp: HttpHeaderResponse[]) => of(new PatchCourseSuccessAction(patchedresp))),
+      switchMap((patchedresp: HttpHeaderResponse) => of(new PatchCourseSuccessAction(patchedresp))),
      
     );
   });

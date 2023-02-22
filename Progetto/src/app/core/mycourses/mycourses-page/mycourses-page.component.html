@@ -49,7 +49,7 @@
       </div>
 
       <form [formGroup]="courseForm" [ngStyle]="{'display':display}"
-        *ngIf="(mycourseDetails$ |   async); let mycoursedetail" (ngSubmit)="saveOnStore()">
+        *ngIf="(mycourseDetails$ |   async); let mycoursedetail" (ngSubmit)="patchOnStore()">
         <div class="mb-3" class="form-group">Course ID
           <input type="text" class="form-control" formControlName="id_corso" id="id_corso" aria-describedby="id_corso">
         </div>
@@ -94,8 +94,7 @@
           <input type="text" class="form-control" formControlName="categoria" id="categoria"
             aria-describedby="categoria">
         </div>
-        <button type="submit" id="editbutton" class="btn btn-danger" [disabled]="!courseForm.valid">Save on storage and
-          disk</button>
+        <button type="submit" id="editbutton" class="btn btn-danger" [disabled]="!courseForm.valid">Patch on remote db</button>
         <button type="reset" class="btn btn-secondary" (click)="disableForm()"> Back</button>
       </form>
 
@@ -189,13 +188,16 @@
       </div>
       <div class="col-sm">
         <br>
-        <!-- Errors -->
-        <div class="card" *ngIf="errors$ | async as errors">
-          <ul>
-            <li *ngFor="let error of errors">
-              {{error}}
-            </li>
-          </ul>
+        <div class="card" *ngIf="(response$ |   async); let resp">
+          <svg class="bi" class="card-img-left" width="32" height="32" fill="red">
+            <use xlink:href="bootstrap-icons.svg#clipboard2" />
+          </svg>
+          <div class="resp">
+            <p class="resp"> {{resp.status | json}}</p> 
+            <p class="resp"> {{resp.statusText | json}}</p>                   
+            <!-- <p class="draft">Descrizione: {{resp?.statusText}}</p>    -->
+
+          </div>
         </div>
       </div>
 

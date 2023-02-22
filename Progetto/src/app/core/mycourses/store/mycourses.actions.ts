@@ -50,7 +50,7 @@ export class PatchCourseAction implements Action{
 }
 export class PatchCourseSuccessAction implements Action{
   readonly type = EMyCoursesActions.PATCH_COURSE_SUCCESS;
-  constructor(public payload: any[]){}
+  constructor(public payload: any){}
 }
 export class ResetStorage implements Action{
   readonly type = EMyCoursesActions.RESET_STORAGE;

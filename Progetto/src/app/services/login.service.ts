@@ -6,6 +6,9 @@ import { AppConstants } from '../app.constants';
 import { LoginData } from '../login/login-page/login.model';
 import { LoginResult } from '../login/login-page/login-result.model';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.states';
+import { ResetStorage } from '../core/mycourses/store/mycourses.actions';
 
 // chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
 
@@ -18,7 +21,8 @@ export class LoginService {
   constructor(
     private httpClient: HttpClient,
     private jwtHelper: JwtHelperService,
-    public router: Router
+    public router: Router,
+    private store: Store<AppState>
   ) { }
 
   public login(loginData: LoginData): Observable<LoginResult> {
@@ -85,6 +89,8 @@ export class LoginService {
   public logout() {
 
     localStorage.setItem(AppConstants.LOGIN_STORAGE, '');
+    this.store.dispatch(new ResetStorage());
+    window.location.reload;
     this.router.navigate(['']);
     
   }
