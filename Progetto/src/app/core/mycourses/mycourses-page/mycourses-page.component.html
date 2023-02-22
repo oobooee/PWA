@@ -1,7 +1,15 @@
 <div class="container">
+  <div class="alert alert-success" *ngIf="feedback && feedback.success">
+    {{ feedback.message }}
+    <button type="button" class="btn-close" aria-label="Close" (click)="feedbackEvHandler()"></button>
+  </div>
+
+  <div class="alert alert-danger " *ngIf="feedback && !feedback.success">
+    {{ feedback.message }}
+  </div>
   <div class="row">
     <div class="col-sm">
-      <h5>Course Lists</h5>
+      <h6>Course Lists</h6>
       <div class="card" *ngFor="let c of mycourses$ | async">
 
         <div class="card-body">
@@ -21,8 +29,8 @@
 
 
     <div class="col-sm">
-      <h5>Course Details</h5>
 
+      <h6>Course Details</h6>
       <div class="card" *ngIf="(mycourseDetails$ |   async); let mycoursedetail" [ngStyle]="{'display':displayView}">
         <!-- <img [src]="m?.image?.medium" class="card-img-top" [alt]="m.name"> -->
         <div class="card-body">
@@ -50,109 +58,129 @@
 
       <form [formGroup]="courseForm" [ngStyle]="{'display':display}"
         *ngIf="(mycourseDetails$ |   async); let mycoursedetail" (ngSubmit)="patchOnStore()">
-        <div class="mb-3" class="form-group">Course ID
-          <input type="text" class="form-control" formControlName="id_corso" id="id_corso" aria-describedby="id_corso">
+        <div class="mb-3" class="form-group ">Course ID
+          <input type="text" class="form-control form-control-sm" formControlName="id_corso" id="id_corso"
+            aria-describedby="id_corso">
         </div>
         <div class="mb-3" class="form-group">Title:
-          <input type="text" class="form-control" formControlName="titolo" id="titolo" aria-describedby="titolo">
+          <input type="text" class="form-control form-control-sm" formControlName="titolo" id="titolo"
+            aria-describedby="titolo">
         </div>
 
         <div class="mb-3" class="form-group">Total seats:
-          <input type="text" class="form-control" formControlName="numPosti" id="numPosti" aria-describedby="numPosti">
+          <input type="text" class="form-control form-control-sm" formControlName="numPosti" id="numPosti"
+            aria-describedby="numPosti">
         </div>
-
         <div class="mb-3" class="form-group">Available seats:
-          <input type="text" class="form-control" formControlName="numPostiDisponibili" id="numPostiDisponibili">
+          <input type="text" class="form-control form-control-sm" formControlName="numPostiDisponibili"
+            id="numPostiDisponibili">
         </div>
         <div class="mb-sm-2" class="form-group">Expected exam:
-          <input type="text" class="form-control" formControlName="previstoEsame" id="previstoEsame">
+          <input type="text" class="form-control form-control-sm" formControlName="previstoEsame" id="previstoEsame">
         </div>
         <div class="mb-3" class="form-group">Price:
-          <input type="text" class="form-control" formControlName="prezzo" id="prezzo" aria-describedby="prezzo">
+          <input type="text" class="form-control form-control-sm" formControlName="prezzo" id="prezzo"
+            aria-describedby="prezzo">
         </div>
         <div class="mb-3" class="form-group">Start date:
-          <input type="datetime" class="form-control" formControlName="inizio" id="inizio" aria-describedby="inizio">
+          <input type="datetime" class="form-control form-control-sm" formControlName="inizio" id="inizio"
+            aria-describedby="inizio">
 
         </div>
         <div class="mb-3" class="form-group">End date:
-          <input type="datetime" class="form-control" formControlName="fine" id="fine" aria-describedby="fine">
+          <input type="datetime" class="form-control form-control-sm" formControlName="fine" id="fine"
+            aria-describedby="fine">
         </div>
         <div class="mb-3" class="form-group">Credits:
-          <input type="text" class="form-control" formControlName="crediti" id="crediti" aria-describedby="crediti">
+          <input type="text" class="form-control form-control-sm" formControlName="crediti" id="crediti"
+            aria-describedby="crediti">
         </div>
         <div class="mb-3" class="form-group">Total hours:
-          <input type="text" class="form-control" formControlName="ore" id="ore" aria-describedby="ore">
+          <input type="text" class="form-control form-control-sm" formControlName="ore" id="ore" aria-describedby="ore">
         </div>
         <div class="mb-3" class="form-group">Description:
-          <input type="text" class="form-control" formControlName="descrizione" id="descrizione"
+          <input type="text" class="form-control form-control-sm" formControlName="descrizione" id="descrizione"
             aria-describedby="descrizione">
         </div>
         <div class="mb-3" class="form-group">Language:
-          <input type="text" class="form-control" formControlName="lingua" id="lingua" aria-describedby="lingua">
+          <input type="text" class="form-control form-control-sm" formControlName="lingua" id="lingua"
+            aria-describedby="lingua">
         </div>
         <div class="mb-3" class="form-group">Category:
-          <input type="text" class="form-control" formControlName="categoria" id="categoria"
+          <input type="text" class="form-control form-control-sm" formControlName="categoria" id="categoria"
             aria-describedby="categoria">
-        </div>
-        <button type="submit" id="editbutton" class="btn btn-danger" [disabled]="!courseForm.valid">Patch on remote db</button>
+        </div><br>
+        <button type="submit" id="editbutton" class="btn btn-danger" [disabled]="!courseForm.valid">Patch on remote
+          db</button> &nbsp;
         <button type="reset" class="btn btn-secondary" (click)="disableForm()"> Back</button>
       </form>
 
-      <form [formGroup]="courseForm" [ngStyle]="{'display':displayCreate}" >
+      <form [formGroup]="courseForm" [ngStyle]="{'display':displayCreate}">
         <div class="mb-3" class="form-group">Course ID
-          <input type="text" class="form-control" formControlName="id_corso" id="id_corso" aria-describedby="id_corso">
+          <input type="text" class="form-control form-control-sm" formControlName="id_corso" id="id_corso"
+            aria-describedby="id_corso">
         </div>
         <div class="mb-3" class="form-group">Title:
-          <input type="text" class="form-control" formControlName="titolo" id="titolo" aria-describedby="titolo">
+          <input type="text" class="form-control form-control-sm" formControlName="titolo" id="titolo"
+            aria-describedby="titolo">
         </div>
         <div class="mb-3" class="form-group">Total seats:
-          <input type="text" class="form-control" formControlName="numPosti" id="numPosti" aria-describedby="numPosti">
+          <input type="text" class="form-control form-control-sm" formControlName="numPosti" id="numPosti"
+            aria-describedby="numPosti">
         </div>
 
         <div class="mb-3" class="form-group">Available seats:
-          <input type="text" class="form-control" formControlName="numPostiDisponibili" id="numPostiDisponibili">
+          <input type="text" class="form-control form-control-sm" formControlName="numPostiDisponibili"
+            id="numPostiDisponibili">
         </div>
         <div class="mb-sm-2" class="form-group">Expected exam:
-          <input type="text" class="form-control" formControlName="previstoEsame" id="previstoEsame">
+          <input type="text" class="form-control form-control-sm" formControlName="previstoEsame" id="previstoEsame">
         </div>
         <div class="mb-3" class="form-group">Price:
-          <input type="text" class="form-control" formControlName="prezzo" id="prezzo" aria-describedby="prezzo">
+          <input type="text" class="form-control form-control-sm" formControlName="prezzo" id="prezzo"
+            aria-describedby="prezzo">
         </div>
         <div class="mb-3" class="form-group">Start date:
-          <input type="datetime" class="form-control" formControlName="inizio" id="inizio" aria-describedby="inizio">
+          <input type="datetime" class="form-control form-control-sm" formControlName="inizio" id="inizio"
+            aria-describedby="inizio">
 
         </div>
         <div class="mb-3" class="form-group">End date:
-          <input type="datetime" class="form-control" formControlName="fine" id="fine" aria-describedby="fine">
+          <input type="datetime" class="form-control form-control-sm" formControlName="fine" id="fine"
+            aria-describedby="fine">
         </div>
         <div class="mb-3" class="form-group">Credits:
-          <input type="text" class="form-control" formControlName="crediti" id="crediti" aria-describedby="crediti">
+          <input type="text" class="form-control form-control-sm" formControlName="crediti" id="crediti"
+            aria-describedby="crediti">
         </div>
         <div class="mb-3" class="form-group">Total hours:
-          <input type="text" class="form-control" formControlName="ore" id="ore" aria-describedby="ore">
+          <input type="text" class="form-control form-control-sm" formControlName="ore" id="ore" aria-describedby="ore">
         </div>
         <div class="mb-3" class="form-group">Description:
-          <input type="text" class="form-control" formControlName="descrizione" id="descrizione"
+          <input type="text" class="form-control form-control-sm" formControlName="descrizione" id="descrizione"
             aria-describedby="descrizione">
         </div>
         <div class="mb-3" class="form-group">Language:
-          <input type="text" class="form-control" formControlName="lingua" id="lingua" aria-describedby="lingua">
+          <input type="text" class="form-control form-control-sm" formControlName="lingua" id="lingua"
+            aria-describedby="lingua">
         </div>
         <div class="mb-3" class="form-group">Category:
-          <input type="text" class="form-control" formControlName="categoria" id="categoria"
+          <input type="text" class="form-control form-control-sm" formControlName="categoria" id="categoria"
             aria-describedby="categoria">
         </div>
         <br>
-        <button type="submit" id="createbutton" class="btn btn-primary btn-sm" [disabled]="!courseForm.valid" (click)="saveOndDB()">Save and submit </button>
+        <button type="submit" id="createbutton" class="btn btn-primary btn-sm" [disabled]="!courseForm.valid"
+          (click)="saveOndDB()">Save and submit </button>
         &nbsp;
-        <button id="savedraft" class="btn btn-warning btn-sm" [disabled]="!courseForm.valid" (click)="saveOnStorage()">Save
+        <button id="savedraft" class="btn btn-warning btn-sm" [disabled]="!courseForm.valid"
+          (click)="saveOnStorage()">Save
           draft</button>&nbsp;
         <button type="reset" class="btn btn-info btn-sm" (click)="disableForm()"> Back</button>
       </form>
 
     </div>
     <div class="col-sm">
-      <h5>Your Profile</h5>
+      <h6>Your Profile</h6>
       <div class="card" *ngIf="(teacherDetails$ |   async); let teacherDetails">
         <svg class="bi" class="card-img-top" width="50" height="50" fill="green">
           <use xlink:href="bootstrap-icons.svg#person-vcard" />
@@ -160,13 +188,13 @@
         <div class="card-body">
           <h6>Your Username: </h6>
           <h5 class="card-title">{{teacherDetails?.username}}</h5>
-          Your userid: 
+          Your userid:
           <p class="card-text">{{teacherDetails?.id_user}}</p>
-          Name: 
+          Name:
           <p class="card-text">{{teacherDetails?.nome}}</p>
-          Surname: 
+          Surname:
           <p class="card-text">{{teacherDetails?.cognome}}</p>
-          Email: 
+          Email:
           <p class="card-text" type="email">{{teacherDetails?.email}}</p>
 
         </div>
@@ -179,28 +207,17 @@
             <use xlink:href="bootstrap-icons.svg#clipboard2" />
           </svg>
           <div class="draft">
-            <p class="draft">Titolo: {{myd?.titolo}}</p>          
-            <p class="draft">Descrizione: {{myd?.descrizione}}</p>   
-
+            <p class="draft">Titolo: {{myd?.titolo}}</p>
+            <p class="draft">Descrizione: {{myd?.descrizione}}</p>
+            <button id="deletedraft" class="btn btn-warning btn-sm"
+              (click)="cleanSingleDraftFromStorage()">Delete</button>
           </div>
+
         </div>
 
-      </div>
-      <div class="col-sm">
-        <br>
-        <div class="card" *ngIf="(response$ |   async); let resp">
-          <svg class="bi" class="card-img-left" width="32" height="32" fill="red">
-            <use xlink:href="bootstrap-icons.svg#clipboard2" />
-          </svg>
-          <div class="resp">
-            <p class="resp"> {{resp.status | json}}</p> 
-            <p class="resp"> {{resp.statusText | json}}</p>                   
-            <!-- <p class="draft">Descrizione: {{resp?.statusText}}</p>    -->
-
-          </div>
-        </div>
       </div>
 
     </div>
   </div>
 </div>
+

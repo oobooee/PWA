@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { MyCourses } from '../model/MyCourses';
 import { MyCourseDetail } from '../model/MyCourseDetails';
 import { Teacher } from '../model/Teacher';
-import { HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase } from '@angular/common/http';
 
 export enum EMyCoursesActions {
   SHOW_ALL = '[MyCourses] Show All',
@@ -50,7 +50,7 @@ export class PatchCourseAction implements Action{
 }
 export class PatchCourseSuccessAction implements Action{
   readonly type = EMyCoursesActions.PATCH_COURSE_SUCCESS;
-  constructor(public payload: any){}
+  constructor(public payload: HttpResponse<any>){}
 }
 export class ResetStorage implements Action{
   readonly type = EMyCoursesActions.RESET_STORAGE;
@@ -88,7 +88,7 @@ export class CreateAction implements Action {
 }
 export class CreateSuccessAction implements Action {
   readonly type = EMyCoursesActions.CREATE_SUCCESS;
-  constructor(public payload: MyCourseDetail) {}
+  constructor(public payload: any) {}
 }
 export class CreateFailureAction implements Action {
   readonly type = EMyCoursesActions.CREATE_FAILURE;

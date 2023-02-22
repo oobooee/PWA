@@ -64,7 +64,7 @@ export class MyCoursesService {
     return EMPTY;
   }
 
-  patchCourseService(c: MyCourseDetail): Observable<any> {
+  patchCourseService(c: MyCourseDetail): Observable<HttpResponse<any>> {
     let login: LoginResult;
     let loginStr: string | null = localStorage.getItem(
       AppConstants.LOGIN_STORAGE
@@ -73,11 +73,11 @@ export class MyCoursesService {
       login = JSON.parse(loginStr);
       //const header1= {'Content-Type':'application/json',};
       const p = baseUrl.concat(login.username).concat("/docenze/");
-      return this.httpClient.patch<any>(p, c, {
-           //  headers: 'headers',
-             observe: 'response',
-             //responseType: 'json'
-         });
+      return this.httpClient.patch<any>(p, c,  {
+        //  headers: 'headers',
+          observe: 'response',
+          //responseType: 'json'
+      });
     }
     return EMPTY;
   }
@@ -93,7 +93,7 @@ export class MyCoursesService {
   //  }
 
 
-  addCourseService(c: MyCourseDetail): Observable<MyCourseDetail> {
+  addCourseService(c: MyCourseDetail): Observable<any> {
     let login: LoginResult;
     let loginStr: string | null = localStorage.getItem(
       AppConstants.LOGIN_STORAGE
@@ -101,7 +101,11 @@ export class MyCoursesService {
     if (loginStr !== '' && loginStr !== null && loginStr !== undefined) {
       login = JSON.parse(loginStr);
       const p = baseUrl.concat(login.username).concat("/docenze/");
-      return this.httpClient.post<MyCourseDetail>(p, c);
+      return this.httpClient.post<any>(p, c, {
+        //  headers: 'headers',
+          observe: 'response',
+          //responseType: 'json'
+      });
 
     }
     return EMPTY;

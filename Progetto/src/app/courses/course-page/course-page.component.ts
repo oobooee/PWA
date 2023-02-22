@@ -49,6 +49,7 @@ export class CoursePageComponent implements OnInit, OnDestroy{
     console.log("ngOnINit coursepage component");
     this.getcourseSubscr = this.courseService.getAllCourses()?.subscribe(data => {
     this.courses = data;
+    this.feedback ={success:true, message: `Done`};
   }, error => {
     this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations`};
   })
@@ -58,7 +59,7 @@ export class CoursePageComponent implements OnInit, OnDestroy{
       this.getcoursesbytitleSubscr = this.courseService.getAllCoursesBytitle(title)?.subscribe(data => {
       this.courses = data;
   }, error => {
-    this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations`};
+    this.feedback ={success:false, message: `Unable to retrieve data. See log for more informations`, };
   })
   }
   ngOnDestroy(): void {

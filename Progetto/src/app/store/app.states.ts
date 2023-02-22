@@ -18,7 +18,7 @@ export interface MyCoursesState {
     myCourseDetail: MyCourseDetail;
     teacherDetails: Teacher;
     id: number,
-    response: {}
+    response: HttpResponse<any>,
     message: any;
 }
 
@@ -30,7 +30,7 @@ export const initialmyCoursesState: MyCoursesState = {
     myDraft: [],
     myCourseDetail: {},
     teacherDetails: {},
-    response: "HttpResponse "+{},
+    response: new HttpResponse(),
     id: 0,
     message: null
 };

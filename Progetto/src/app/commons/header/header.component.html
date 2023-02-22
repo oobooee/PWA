@@ -23,9 +23,15 @@
           </li>
         </ul>
 
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" [hidden]="!(isLogged() || isLoggedUser())">
           <li class="nav-item">
-            <a class="nav-link" routerLink="mycourses">My Courses</a>
+            <a class="nav-link" routerLink="mycourses">My Courses as teacher</a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" [hidden]="!(isLogged() || isLoggedUser())">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="mycoursesAsStudent">My Courses as student</a>
           </li>
         </ul>
 

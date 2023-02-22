@@ -2,7 +2,7 @@ import { Component, Input, LOCALE_ID, OnDestroy, OnInit } from '@angular/core';
 import { MyCourses } from '../model/MyCourses';
 import { State, Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.states';
-import { Observable, Subscription, map } from 'rxjs';
+import { Observable, Subscription, filter, map } from 'rxjs';
 import {  draftedCourse, selectMessageDetails, selectMyCourseDetail, selectMyCoursesList, selectTeacheDetails } from '../store/mycourses.selector';
 import { CreateAction, GetTeacherAction, ID, PatchCourseAction, ResetStorage, SaveOnStorage, SaveOnStorageSuccess, ShowAllAction, ShowDetailAction } from '../store/mycourses.actions';
 import { MyCourseDetail } from '../model/MyCourseDetails';
@@ -13,9 +13,10 @@ import { CustomValidators } from 'src/app/commons/validators/custom-validators';
 import { Title } from '@angular/platform-browser';
 import { __values } from 'tslib';
 import { DatePipe, formatDate } from '@angular/common';
-import { HttpHeaderResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MycoursesRoutingModule } from '../mycourses-routing.module';
+import { Feedback } from 'src/app/model/feedback.model';
 
 @Component({
   selector: 'app-mycourses-page',
@@ -28,7 +29,7 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
   mycourses$?: Observable<MyCourses[]>;
   mycourseDetails$?: Observable<MyCourseDetail>;
   teacherDetails$?: Observable<Teacher>;
-  response$?: Observable<any>; 
+  response$?: Observable<HttpResponse<any>>; 
   errors$?: Observable<any>;
   myDraft$?: Observable<MyCourseDetail[]>;
   display:string = "none";
@@ -38,10 +39,14 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
   c?: MyCourseDetail;
   courses?: MyCourses[];
   draftedCourses?: MyCourseDetail[];
+  resp: any;
   subscription1$: Subscription | undefined;
+  feedback?: Feedback
 
   @Input()   
   courseDetail?: MyCourseDetail;
+
+  
   
 
 
@@ -102,19 +107,25 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
     this.store.dispatch(new PatchCourseAction(courseFormAcquired))
     //this.subscription1$ = this.store.select(selectMessageDetails).subscribe(resp => {console.log(resp)});
     this.response$ = this.store.select(selectMessageDetails)
-    this.refresh();
-    console.log("---------------")
-    console.log(this.response$)
-    //console.log(this.subscription1$)
-    console.log("---------------")
+   
+    this.response$.subscribe(resp => {
+      
+      this.feedback = { success: resp.ok, message: "Operazione eseguita "+ "("+resp.status+")" }
+    })
   }
+
+
   saveOndDB(){
     console.log("save on db");
     this.courseForm.reset;
     const courseFormAcquired: MyCourseDetail = this.courseForm.getRawValue();
     this.store.dispatch(new CreateAction(courseFormAcquired))
-    this.refresh();
+    this.response$ = this.store.select(selectMessageDetails)   
+    this.response$.subscribe(resp => {
+      this.feedback = { success: resp.ok, message: "Operazione eseguita "+ "("+resp.status+")" }
+    })
   }
+  
   
   saveOnStorage(){
     console.log("save on local storage");
@@ -130,6 +141,8 @@ export class MycoursesPageComponent implements OnInit , OnDestroy{
     console.log(this.myDraft$);
     
   }
+  cleanSingleDraftFromStorage(){}
+
   
 
   
@@ -205,6 +218,15 @@ getnextfromserver(){
   let max: number = 10000;
   return Math.floor(Math.random() * max);
 }
+
+ feedbackEvHandler(){
+ this.feedback = undefined 
+ this.disableForm()
+
+}
+
+
+
 
 
 

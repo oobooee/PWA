@@ -13,8 +13,8 @@ const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: 'observables', component: ObservablePageComponent},
   {path: 'pipes', component: PipePageComponent},
-  { path: 'admin-ops', loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule), canLoad:[AuthGuardServiceUser] },
-  { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canLoad:[AuthGuardServiceUser] },
+  { path: 'admin-ops', loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule), canLoad:[AuthGuardService] },
+  { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canLoad:[AuthGuardService] },
   { path: 'mycourses', loadChildren: () => import('./core/mycourses/mycourses.module').then(m => m.MycoursesModule),  canLoad:[AuthGuardServiceUser] },
   
 
