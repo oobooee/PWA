@@ -16,59 +16,60 @@ import { AppState } from 'src/app/store/app.states';
   templateUrl: './login-page.component.html'
 })
 export class LoginPageComponent implements OnInit {
- // teacherDetails$?: Observable<Teacher>;
-  display:string = "";
+  // teacherDetails$?: Observable<Teacher>;
+  display: string = "";
   loginData: LoginData;
-  constructor(private loginService: LoginService, private router: Router, private store: Store<AppState> ){
-    this.loginData = {username: '', password: ''}
-   // this.teacherDetails$ = this.store.select(selectTeacheDetails);
+  constructor(private loginService: LoginService, private router: Router, private store: Store<AppState>) {
+    this.loginData = { username: '', password: '' }
+    // this.teacherDetails$ = this.store.select(selectTeacheDetails);
     //this.refresh();
   }
   ngOnInit(): void {
     this.refresh();
   }
 
-  loginSubmit(){
+  loginSubmit() {
     console.log(JSON.stringify(this.loginData));
     this.loginService.login(this.loginData).subscribe(res => {
-      
+
       //localStorage.setItem(AppConstants.LOGIN_STORAGE, JSON.stringify(res));
-     
-        this.router.navigate(['']);
-        localStorage.setItem(AppConstants.LOGIN_STORAGE, JSON.stringify(res));
-             
-      console.log(  `${JSON.stringify(res)}`);
+
+
+      localStorage.setItem(AppConstants.LOGIN_STORAGE, JSON.stringify(res));
+
+      console.log(`${JSON.stringify(res)}`);
       this.getUserDetails();
-      this.router.navigate(['mycourses']);
-  }, (err: any) => {
-    if (err instanceof HttpErrorResponse) {
-      if (err.status !== 401) {
-       return;
+      if (res.username == 'admin') { this.router.navigate(['admin-ops']); }
+      else { this.router.navigate(['mycourses']); }
+    }, (err: any) => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status !== 401) {
+          return;
+        }
+        this.router.navigate(['login']);
       }
-      this.router.navigate(['login']);
-    }
-    this.openModalMessage();
-    console.log( "Unauthorized");
-  })
+      this.openModalMessage();
+      console.log("Unauthorized");
+    })
   }
 
-  
-  openModalMessage(){
+
+  openModalMessage() {
     this.display = "block";
-    
+
   }
-  closeModalMessage(){
+  closeModalMessage() {
     this.display = "none";
   }
 
-  
-getUserDetails(){
-  this.store.dispatch(new GetTeacherAction());
-  console.log(this.store)
-}
-refresh(): void {
-  window.location.reload;
-}
+
+  getUserDetails() {
+    this.store.dispatch(new GetTeacherAction());
+    console.log(this.store)
+  }
+  refresh(): void {
+    window.location.reload;
+  }
 
 }
 
