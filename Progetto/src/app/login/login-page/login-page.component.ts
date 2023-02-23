@@ -43,13 +43,9 @@ export class LoginPageComponent implements OnInit {
       else { this.router.navigate(['mycourses']); }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
-        if (err.status !== 401) {
-          return;
-        }
+        this.openModalMessage();
         this.router.navigate(['login']);
       }
-      this.openModalMessage();
-      console.log("Unauthorized");
     })
   }
 

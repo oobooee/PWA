@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { HttpClient, HttpEventType, HttpHeaderResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaderResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 
-import { MyCourses } from '../model/MyCourses';
+import { MyCourses } from '../core/mycourses/model/MyCourses';
 import { LoginResult } from 'src/app/login/login-page/login-result.model';
 import { AppConstants } from 'src/app/app.constants';
 import { EMPTY } from 'rxjs'
-import { MyCourseDetail } from '../model/MyCourseDetails';
-import { Teacher } from '../model/Teacher';
+import { MyCourseDetail } from '../core/mycourses/model/MyCourseDetails';
+import { Teacher } from '../core/mycourses/model/Teacher';
 
 const baseUrl = 'http://172.18.0.110:8080/progetto/rest/utenti/';
 
@@ -37,7 +37,7 @@ export class MyCoursesService {
   }
 
   getCourseDetailService(c: number): Observable<MyCourseDetail> {
-    let login: LoginResult;
+    let login: LoginResult 
     let loginStr: string | null = localStorage.getItem(
       AppConstants.LOGIN_STORAGE
     );
@@ -46,10 +46,11 @@ export class MyCoursesService {
       const p = baseUrl.concat(login.username).concat("/docenze/").concat(String(c));
 
       return this.httpClient.get<MyCourseDetail>(p);
-      // return this.httpClient.get<MyCourses[]>(baseUrl);
+
     }
     return EMPTY;
   }
+
 
   getUserDetailsService(): Observable<Teacher> {
     let login: LoginResult;
@@ -73,10 +74,8 @@ export class MyCoursesService {
       login = JSON.parse(loginStr);
       //const header1= {'Content-Type':'application/json',};
       const p = baseUrl.concat(login.username).concat("/docenze/");
-      return this.httpClient.patch<any>(p, c,  {
-        //  headers: 'headers',
-          observe: 'response',
-          //responseType: 'json'
+      return this.httpClient.patch<HttpResponse<any>>(p, c, {
+        observe: 'response'
       });
     }
     return EMPTY;
@@ -93,7 +92,7 @@ export class MyCoursesService {
   //  }
 
 
-  addCourseService(c: MyCourseDetail): Observable<any> {
+  addCourseService(c: MyCourseDetail): Observable<HttpResponse<any>> {
     let login: LoginResult;
     let loginStr: string | null = localStorage.getItem(
       AppConstants.LOGIN_STORAGE
@@ -101,12 +100,9 @@ export class MyCoursesService {
     if (loginStr !== '' && loginStr !== null && loginStr !== undefined) {
       login = JSON.parse(loginStr);
       const p = baseUrl.concat(login.username).concat("/docenze/");
-      return this.httpClient.post<any>(p, c, {
-        //  headers: 'headers',
-          observe: 'response',
-          //responseType: 'json'
+      return this.httpClient.post<HttpResponse<any>>(p, c, {
+        observe: 'response'
       });
-
     }
     return EMPTY;
   }

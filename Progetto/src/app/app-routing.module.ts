@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'admin-ops', loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule), canLoad:[AuthGuardService] },
   { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), canLoad:[AuthGuardService] },
   { path: 'mycourses', loadChildren: () => import('./core/mycourses/mycourses.module').then(m => m.MycoursesModule),  canLoad:[AuthGuardServiceUser] },
+  { path: 'mycoursesAsStudent', loadChildren: () => import('./core/mycourses-as-student/mycourses-as-student.module').then(m => m.MycoursesAsStudentModule), canLoad:[AuthGuardServiceUser] },
   
 
 ];

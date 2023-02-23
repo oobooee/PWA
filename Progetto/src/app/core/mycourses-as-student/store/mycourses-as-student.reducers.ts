@@ -1,7 +1,7 @@
-import * as fromActions from './mycourses.actions';
+import * as fromActions from './mycourses-as-student.actions';
 import { MyCoursesState, initialmyCoursesState } from "src/app/store/app.states";
 
-import { EMyCoursesActions } from "./mycourses.actions";
+import { EMyCoursesActions } from "./mycourses-as-student.actions";
 import { HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 
 export function mycoursesReducer(state = initialmyCoursesState,
@@ -74,20 +74,10 @@ export function mycoursesReducer(state = initialmyCoursesState,
                 myDraft: [],
                 myCourseDetail: {},
                 teacherDetails: {},
-                response: new HttpResponse({}),
+                response: new HttpResponse(),
                 id: 0,
                 message: null
             };
-            
-
-        }
-        case EMyCoursesActions.RESET_RESP_STORAGE: {
-    
-            return {
-                ...state,
-                response: new HttpResponse({}),
-            };
-            
 
         }
 

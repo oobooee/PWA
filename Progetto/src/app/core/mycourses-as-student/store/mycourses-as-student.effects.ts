@@ -19,14 +19,14 @@ import {
   SaveOnStorage,
   SaveOnStorageSuccess,
 
-} from './mycourses.actions';
+} from './mycourses-as-student.actions';
 
 
 import { MyCourses } from '../model/MyCourses';
 import { MyCoursesService } from '../../../services/mycourses.service';
 import { MyCourseDetail } from '../model/MyCourseDetails';
 import { Teacher } from '../model/Teacher';
-import { HttpErrorResponse, HttpEvent, HttpEventType, HttpHandler, HttpHeaderResponse, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpEventType, HttpHandler, HttpHeaderResponse, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { AppState } from 'src/app/store/app.states';
 
 @Injectable()
@@ -67,18 +67,16 @@ export class MyCoursesEffects {
     return this.actions$.pipe(
       ofType<PatchCourseAction>(EMyCoursesActions.PATCH_COURSE),
       switchMap((action) => this.mycoursesService.patchCourseService(action.payload)),
-      switchMap((patchedresp: HttpResponse<any>) => of(new PatchCourseSuccessAction(patchedresp)))
+      switchMap((patchedresp: HttpResponse<any>) => of(new PatchCourseSuccessAction(patchedresp))),
      
     );
   });
-
-  
 
   postCourse$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
       ofType<CreateAction>(EMyCoursesActions.CREATE),
       switchMap((action) => this.mycoursesService.addCourseService(action.payload)),
-      switchMap((patchedresp: HttpResponse<any>) => of(new CreateSuccessAction(patchedresp))),
+      switchMap((patchedresp: HttpHeaderResponse) => of(new CreateSuccessAction(patchedresp))),
      
     );
   });

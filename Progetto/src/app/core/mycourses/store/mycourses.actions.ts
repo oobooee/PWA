@@ -2,14 +2,14 @@ import { Action } from '@ngrx/store';
 import { MyCourses } from '../model/MyCourses';
 import { MyCourseDetail } from '../model/MyCourseDetails';
 import { Teacher } from '../model/Teacher';
-import { HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpResponse, HttpResponseBase } from '@angular/common/http';
+import { HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 
 export enum EMyCoursesActions {
   SHOW_ALL = '[MyCourses] Show All',
   SHOW_ALL_SUCCESS = '[MyCourses] Show All Success',
   SHOW_DETAIL =' [MyCourseDetail] Show detail ',
   SHOW_DETAIL_SUCCESS =' [MyCourseDetail] Show detail success',
-  ID = '[ID ] Show id success',
+  ID = '[ID ] Get id ',
   GET_TEACHER = '[Teacher ] Get teacher ',
   GET_TEACHER_SUCCESS = '[Teacher ] Get teacher success',
   PATCH_COURSE = '[MyCourses ] Patch course ',
@@ -19,7 +19,8 @@ export enum EMyCoursesActions {
   CREATE = '[MyCourses] Create',
   CREATE_SUCCESS = '[MyCourses] Create Success',
   CREATE_FAILURE = '[MyCourses] Create Failure',
-  RESET_STORAGE = '[RESET STORAGE] Reset successful'
+  RESET_STORAGE = '[RESET STORAGE] Reset successful',
+  RESET_RESP_STORAGE = '[RESET STORAGE RESP] Reset response successful',
 }
 
 export class ShowAllAction implements Action {
@@ -56,6 +57,10 @@ export class ResetStorage implements Action{
   readonly type = EMyCoursesActions.RESET_STORAGE;
   
 }
+export class ResetStorageResponse implements Action{
+  readonly type = EMyCoursesActions.RESET_RESP_STORAGE;
+  
+}
 
 
 export class GetTeacherAction implements Action {
@@ -88,11 +93,11 @@ export class CreateAction implements Action {
 }
 export class CreateSuccessAction implements Action {
   readonly type = EMyCoursesActions.CREATE_SUCCESS;
-  constructor(public payload: any) {}
+  constructor(public payload: HttpResponse<any>) {}
 }
 export class CreateFailureAction implements Action {
   readonly type = EMyCoursesActions.CREATE_FAILURE;
   constructor(public payload: any) {}
 }
 
-export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | ResetStorage |CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction | PatchCourseAction |PatchCourseSuccessAction | SaveOnStorage |SaveOnStorageSuccess ;
+export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | ResetStorage |ResetStorageResponse| CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction | PatchCourseAction |PatchCourseSuccessAction | SaveOnStorage |SaveOnStorageSuccess ;
