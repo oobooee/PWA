@@ -40,22 +40,21 @@ export class LoginService {
     } else {
       return false;
     }
-    if (login.username == "user"){
+    if (login.username == "user") {  //Da Sostituire user con role: admins 
       return false
     }
-    else{
-     //check token   
-    const token = login.token;
-    let tokenExpired: boolean = false;
-    if (this.jwtHelper.isTokenExpired(token)) {
-      localStorage.setItem(AppConstants.LOGIN_STORAGE, '');
-      tokenExpired = true;
-      this.httpClient.delete(token);
-      console.log("token expired");
-      //this.isTokenExpired();
+    else {
+      //check token   
+      const token = login.token;
+      let tokenExpired: boolean = false;
+      if (this.jwtHelper.isTokenExpired(token)) {
+        localStorage.setItem(AppConstants.LOGIN_STORAGE, '');
+        tokenExpired = true;
+        this.httpClient.delete(token);
+        console.log("token expired");
+      }
+      return !tokenExpired;
     }
-    return !tokenExpired;
-   }
   }
 
   public isAuthenticatedUser(): boolean {
@@ -68,22 +67,21 @@ export class LoginService {
     } else {
       return false;
     }
-    if (login.username == "admin"){
+    if (login.username == "admin") {  //Da Sostituire admin con role: admins 
       return false
     }
-    else{
-     //check token   
-    const token = login.token;
-    let tokenExpired: boolean = false;
-    if (this.jwtHelper.isTokenExpired(token)) {
-      localStorage.setItem(AppConstants.LOGIN_STORAGE, '');
-      tokenExpired = true;
-      this.httpClient.delete(token);
-      console.log("token expired");
-      //this.isTokenExpired();
+    else {
+      //check token   
+      const token = login.token;
+      let tokenExpired: boolean = false;
+      if (this.jwtHelper.isTokenExpired(token)) {
+        localStorage.setItem(AppConstants.LOGIN_STORAGE, '');
+        tokenExpired = true;
+        this.httpClient.delete(token);
+        console.log("token expired");
+      }
+      return !tokenExpired;
     }
-    return !tokenExpired;
-   }
   }
 
   public logout() {
@@ -92,7 +90,7 @@ export class LoginService {
     this.store.dispatch(new ResetStorage());
     window.location.reload;
     this.router.navigate(['']);
-    
+
   }
 
   // public isTokenExpired() {

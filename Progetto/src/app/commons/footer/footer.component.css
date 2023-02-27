@@ -1,13 +1,13 @@
-h5 {
-    background-color:  rgb(77, 138, 77);
+h6 {
+    background-color: rgb(77, 138, 77);
+    color: white;
     padding: 20PX;
     margin: 0;
-    position: relative;
     bottom: 0;
     width: 100%;
 }
-footer{
-    position:fixed;
-    bottom:0px;
-    width:100%;
-    }
+
+footer {
+    bottom: 0px;
+    width: 100%;
+}

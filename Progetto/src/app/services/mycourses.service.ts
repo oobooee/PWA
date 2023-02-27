@@ -44,7 +44,7 @@ export class MyCoursesService {
     if (loginStr !== '' && loginStr !== null && loginStr !== undefined) {
       login = JSON.parse(loginStr);
       const p = baseUrl.concat(login.username).concat("/docenze/").concat(String(c));
-
+      console.log(p)
       return this.httpClient.get<MyCourseDetail>(p);
 
     }

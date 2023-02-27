@@ -232,7 +232,7 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
     this.feedback = undefined,
     this.store.dispatch(new ResetStorageResponse())
     this.disableForm();
-    this.getAllCourses();   
+    //this.getAllCourses();   
 
   }
 

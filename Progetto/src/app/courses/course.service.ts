@@ -31,6 +31,7 @@ export class CourseService {
   }
 
   addCourse(c: Course): Observable<Course> {
+    this.courses?.push(c)
      return this.httpClient.post<Course>(path,c)
     .pipe(retry(3),
      catchError(this.handleError));

@@ -10,7 +10,6 @@ import { EMPTY } from "rxjs";
 
 export interface AppState {
     myCoursesState: MyCoursesState;
-   // myCourseDetailState: IMyCourseDetailState;
 
 }
 
@@ -23,8 +22,6 @@ export interface MyCoursesState {
     response: HttpResponse<any>,
     message: any;
 }
-
-
 
 
 export const initialmyCoursesState: MyCoursesState = {

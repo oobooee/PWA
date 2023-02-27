@@ -6,21 +6,21 @@ import { LoginService } from '../../services/login.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements  CanLoad{
-  constructor(public auth: LoginService, public router: Router) { 
+export class AuthGuardService implements CanLoad {
+  constructor(public auth: LoginService, public router: Router) {
 
-    
+
   }
 
-  
+
   canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if (!this.auth.isAuthenticated()) {
       this.router.navigate(['login']);
       return false;
     }
     return true;
-  }  
-
+  }
+}
   // canActivate(): boolean {
   //   if (!this.auth.isAuthenticated()) {
   //     this.router.navigate(['login']);
@@ -28,7 +28,7 @@ export class AuthGuardService implements  CanLoad{
   //   }
   //   return true;
   // }
-}
+
 
 /*
 @Injectable({
