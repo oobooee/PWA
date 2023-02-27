@@ -179,9 +179,9 @@
       </form>
 
     </div>
-    <div class="col-sm">
+    <div class="col-sm" #form1>
       <h6>Your Profile</h6>
-      <div class="card" *ngIf="(teacherDetails$ |   async); let teacherDetails">
+      <div class="card" *ngIf="(teacherDetails$ |   async); let teacherDetails"  >
         <svg class="bi" class="card-img-top" width="50" height="50" fill="green">
           <use xlink:href="bootstrap-icons.svg#person-vcard" />
         </svg>
@@ -201,7 +201,7 @@
       </div>
       <div class="col-sm">
         <br>
-        <!-- Course drafted. -->
+        Course drafted. 
         <div class="card" *ngFor="let myd of myDraft$ | async">
           <svg class="bi" class="card-img-left" width="32" height="32" fill="red">
             <use xlink:href="bootstrap-icons.svg#clipboard2" />

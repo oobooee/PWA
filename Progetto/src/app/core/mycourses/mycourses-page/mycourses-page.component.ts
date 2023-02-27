@@ -1,25 +1,19 @@
-import { Component, Input, LOCALE_ID, OnDestroy, OnInit } from '@angular/core';
-import { MyCourses } from '../model/MyCourses';
-import { State, Store, select } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.states';
-import { Observable, Subscription, filter, map } from 'rxjs';
-import { draftedCourse, selectMessageDetails, selectMyCourseDetail, selectMyCoursesList, selectTeacheDetails } from '../store/mycourses.selector';
-import { CreateAction, GetTeacherAction, ID, PatchCourseAction, ResetStorage, ResetStorageResponse, SaveOnStorage, SaveOnStorageSuccess, ShowAllAction, ShowDetailAction } from '../store/mycourses.actions';
-import { MyCourseDetail } from '../model/MyCourseDetails';
-import { OnReducer } from '@ngrx/store/src/reducer_creator';
-import { Teacher } from '../model/Teacher';
-import { FormBuilder, FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
+import { HttpResponse } from '@angular/common/http';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { CustomValidators } from 'src/app/commons/validators/custom-validators';
-import { Title } from '@angular/platform-browser';
-import { __values } from 'tslib';
-import { DatePipe, formatDate } from '@angular/common';
-import { HttpErrorResponse, HttpHeaderResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { MycoursesRoutingModule } from '../mycourses-routing.module';
 import { Feedback } from 'src/app/model/feedback.model';
+import { AppState } from 'src/app/store/app.states';
+import { MyCourseDetail } from '../model/MyCourseDetails';
+import { MyCourses } from '../model/MyCourses';
+import { Teacher } from '../model/Teacher';
+import { CreateAction, ID, PatchCourseAction, ResetStorageResponse, SaveOnStorageSuccess, ShowAllAction } from '../store/mycourses.actions';
+import { draftedCourse, selectMessageDetails, selectMyCourseDetail, selectMyCoursesList, selectTeacheDetails } from '../store/mycourses.selector';
 
 @Component({
-  selector: 'app-mycourses-page',
+  selector: 'app-mycourses-page', 
   templateUrl: './mycourses-page.component.html',
   styleUrls: ['./mycourses-page.component.css'],
 
@@ -43,14 +37,15 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
   subscription1$: Subscription | undefined;
   feedback?: Feedback
 
-  @Input()
+  @ViewChild('form1')
+  form1?: ElementRef;
+  
+  
+  //@Input()
   courseDetail?: MyCourseDetail;
 
-
-
-
-
   constructor(private store: Store<AppState>, private form: FormBuilder) {
+    
     this.mycourses$ = this.store.select(selectMyCoursesList);
     console.log(this.mycourses$)
     //this.draftedCourses = [];
@@ -86,9 +81,13 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription1$?.unsubscribe();
-
-
   }
+  
+  ngAfterViewInit() { //Da testare
+      this.form1?.nativeElement.style.none;
+    //this.form1.nativeElement.block;
+      }
+
   getAllCourses() {
     this.store.dispatch(new ShowAllAction());
   }
@@ -114,7 +113,6 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
       }
       if(!resp.ok){this.feedback = { success: resp.ok, message: "Errore "+"("+resp.status+")"}}
     })
-    this.subscription1$.unsubscribe
     this.refresh()
   }
 
@@ -131,7 +129,6 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
       }
       if(!resp.ok){this.feedback = { success: resp.ok, message: "Errore "+"("+resp.status+")"}}
     })
-    this.subscription1$.unsubscribe
     this.refresh()
 
     
@@ -150,7 +147,6 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SaveOnStorageSuccess(this.draftedCourses!))
     this.myDraft$ = this.store.select(draftedCourse);
     console.log(this.myDraft$);
-    this.subscription1$?.unsubscribe
 
   }
   cleanSingleDraftFromStorage() { }
@@ -241,3 +237,4 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
   }
 
 }
+

@@ -1,8 +1,8 @@
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
-import { MyCourses } from '../model/MyCourses';
 import { MyCourseDetail } from '../model/MyCourseDetails';
+import { MyCourses } from '../model/MyCourses';
 import { Teacher } from '../model/Teacher';
-import { HttpErrorResponse, HttpEventType, HttpHeaderResponse, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 
 export enum EMyCoursesActions {
   SHOW_ALL = '[MyCourses] Show All',

@@ -1,8 +1,8 @@
-import * as fromActions from './mycourses.actions';
 import { MyCoursesState, initialmyCoursesState } from "src/app/store/app.states";
+import * as fromActions from './mycourses.actions';
 
+import { HttpResponse } from '@angular/common/http';
 import { EMyCoursesActions } from "./mycourses.actions";
-import { HttpHeaderResponse, HttpResponse } from '@angular/common/http';
 
 export function mycoursesReducer(state = initialmyCoursesState,
     action: fromActions.ALL_REDUCER_ACTIONS): MyCoursesState {
@@ -60,15 +60,15 @@ export function mycoursesReducer(state = initialmyCoursesState,
         }
 
         case EMyCoursesActions.SAVE_ON_STORAGE_SUCCESS: {
-    
+
             return {
                 ...state,
-               myDraft: action.payload
+                myDraft: action.payload
             };
 
         }
         case EMyCoursesActions.RESET_STORAGE: {
-    
+
             return {
                 myCourses: [],
                 myDraft: [],
@@ -78,16 +78,16 @@ export function mycoursesReducer(state = initialmyCoursesState,
                 id: 0,
                 message: null
             };
-            
+
 
         }
         case EMyCoursesActions.RESET_RESP_STORAGE: {
-    
+
             return {
                 ...state,
                 response: new HttpResponse({}),
             };
-            
+
 
         }
 

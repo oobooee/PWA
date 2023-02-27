@@ -1,33 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { catchError, exhaustMap, map, mergeMap, switchMap, withLatestFrom } from 'rxjs/operators';
-import { Observable, of, timer } from 'rxjs';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import {
-  ShowAllAction,
-  EMyCoursesActions,
-  ShowAllSuccessAction,
-  ShowDetailAction,
-  ShowDetailSuccessAction,
-  ID,
-  GetTeacherAction,
-  GetTeacherSuccessAction,
-  PatchCourseAction,
-  PatchCourseSuccessAction,
   CreateAction,
   CreateSuccessAction,
-  SaveOnStorage,
-  SaveOnStorageSuccess,
-
+  EMyCoursesActions,
+  GetTeacherAction,
+  GetTeacherSuccessAction,
+  ID,
+  PatchCourseAction,
+  PatchCourseSuccessAction,
+  ShowAllAction,
+  ShowAllSuccessAction,
+  ShowDetailSuccessAction
 } from './mycourses.actions';
 
 
-import { MyCourses } from '../model/MyCourses';
+import { HttpResponse } from '@angular/common/http';
+import { AppState } from 'src/app/store/app.states';
 import { MyCoursesService } from '../../../services/mycourses.service';
 import { MyCourseDetail } from '../model/MyCourseDetails';
+import { MyCourses } from '../model/MyCourses';
 import { Teacher } from '../model/Teacher';
-import { HttpErrorResponse, HttpEvent, HttpEventType, HttpHandler, HttpHeaderResponse, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
-import { AppState } from 'src/app/store/app.states';
 
 @Injectable()
 export class MyCoursesEffects {

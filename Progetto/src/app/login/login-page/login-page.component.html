@@ -1,5 +1,4 @@
-<p>login-page works!</p>
-
+<br>
 <div class="row">
     <div class="col">
         <div class="card-body">
@@ -7,7 +6,7 @@
             <br>
             <form #loginForm="ngForm" (ngSubmit)="loginSubmit()">
                 <div class="form-group">
-                    <label for="userid" class="form-label">Userid</label>
+                    <label for="userid" class="form-label">Username</label>
                     <input id="userid" class="form-control" type="text" name="userid"
                     [(ngModel)]="loginData.username"
                     #userid="ngModel" required>

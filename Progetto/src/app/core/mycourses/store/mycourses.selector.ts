@@ -1,6 +1,5 @@
-import { state } from '@angular/animations';
 import { createSelector } from '@ngrx/store';
-import { AppState,   MyCoursesState } from 'src/app/store/app.states';
+import { AppState, MyCoursesState } from 'src/app/store/app.states';
 
 
 const selectMyState = (state: AppState) => {
