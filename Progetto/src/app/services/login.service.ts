@@ -40,7 +40,7 @@ export class LoginService {
     } else {
       return false;
     }
-    if (login.username == "user") {  //Da Sostituire user con role: admins 
+    if (login.username == "user") {
       return false
     }
     else {
@@ -67,7 +67,7 @@ export class LoginService {
     } else {
       return false;
     }
-    if (login.username == "admin") {  //Da Sostituire admin con role: admins 
+    if (login.username == "admin") {  //Da Sostituire admin con role: admins (modificare l'interfaccia)
       return false
     }
     else {
