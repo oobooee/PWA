@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-sm">
       <h6>Course Lists</h6>
-      <div class="card" *ngFor="let c of mycourses$ | async">
+      <div class="card" *ngFor="let c of coursesFire; let i = index">
 
         <div class="card-body">
           <h6 class="card-title">Course ID: {{ c.id_corso }}</h6>

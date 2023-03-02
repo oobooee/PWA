@@ -24,6 +24,14 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducers } from './store/app.reducers';
 import { MyCoursesEffects } from './core/mycourses/store/mycourses.effects';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
 
 
 
@@ -74,6 +82,11 @@ export function tokenGetter() {
     }),
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot( [MyCoursesEffects] ),
+    AngularFireModule.initializeApp(environment.firebase),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    AngularFirestoreModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -81,7 +94,13 @@ export function tokenGetter() {
 export class AppModule { 
   constructor(){
     console.log("AppModule created");
-
+     
     
+    
+
+
   }
+
+
+  
 }

@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+
 import {
   CreateAction,
   CreateSuccessAction,
@@ -24,11 +25,13 @@ import { MyCoursesService } from '../../../services/mycourses.service';
 import { MyCourseDetail } from '../model/MyCourseDetails';
 import { MyCourses } from '../model/MyCourses';
 import { Teacher } from '../model/Teacher';
+import { FireCourseServices } from 'src/app/services/firecourses.service';
 
 @Injectable()
 export class MyCoursesEffects {
-  constructor(private actions$: Actions, private mycoursesService: MyCoursesService, private store: Store<AppState>) {
-
+  constructor(private actions$: Actions, private mycoursesService: MyCoursesService,
+     private store: Store<AppState>,) {
+      
   }
 
   

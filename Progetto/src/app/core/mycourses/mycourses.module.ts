@@ -5,6 +5,7 @@ import { MycoursesRoutingModule } from './mycourses-routing.module';
 
 import { MycoursesPageComponent } from './mycourses-page/mycourses-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 
 
@@ -18,7 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     MycoursesRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
   ]
 })

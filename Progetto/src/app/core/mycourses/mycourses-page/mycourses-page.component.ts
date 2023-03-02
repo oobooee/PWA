@@ -2,7 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 import { CustomValidators } from 'src/app/commons/validators/custom-validators';
 import { Feedback } from 'src/app/model/feedback.model';
 import { AppState } from 'src/app/store/app.states';
@@ -11,6 +11,13 @@ import { MyCourses } from '../model/MyCourses';
 import { Teacher } from '../model/Teacher';
 import { CreateAction, ID, PatchCourseAction, ResetStorageResponse, SaveOnStorageSuccess, ShowAllAction } from '../store/mycourses.actions';
 import { draftedCourse, selectMessageDetails, selectMyCourseDetail, selectMyCoursesList, selectTeacheDetails } from '../store/mycourses.selector';
+import { FireCourseServices } from 'src/app/services/firecourses.service';
+import { FirebaseApp } from '@angular/fire/app';
+import { CourseService } from 'src/app/courses/course.service';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
 
 @Component({
   selector: 'app-mycourses-page', 
@@ -20,8 +27,10 @@ import { draftedCourse, selectMessageDetails, selectMyCourseDetail, selectMyCour
 })
 export class MycoursesPageComponent implements OnInit, OnDestroy {
 
+ 
   mycourses$?: Observable<MyCourses[]>;
   mycourseDetails$?: Observable<MyCourseDetail>;
+
   teacherDetails$?: Observable<Teacher>;
   response$?: Observable<HttpResponse<any>>;
   errors$?: Observable<any>;
@@ -40,11 +49,15 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
   @ViewChild('form1')
   form1?: ElementRef;
   
-  
+  coursesFireObj$?:AngularFirestoreCollection<MyCourseDetail>
   //@Input()
   courseDetail?: MyCourseDetail;
-
-  constructor(private store: Store<AppState>, private form: FormBuilder) {
+  coursesFire?: MyCourseDetail[];
+  //coursesFire?: AngularFirestoreDocument<any>;
+  
+  constructor(private store: Store<AppState>, private form: FormBuilder, private courseservicefire: FireCourseServices ) {
+   
+    
     
     this.mycourses$ = this.store.select(selectMyCoursesList);
     console.log(this.mycourses$)
@@ -88,8 +101,17 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
     //this.form1.nativeElement.block;
       }
 
-  getAllCourses() {
-    this.store.dispatch(new ShowAllAction());
+  getAllCourses(): void {
+    this.courseservicefire.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.coursesFire = data;
+    });
+    //this.store.dispatch(new ShowAllAction());
   }
   // getUserDetails(){
   //   this.store.dispatch(new GetTeacherAction());
@@ -119,8 +141,12 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
 
   saveOndDB() {
     console.log("save on db");
+   
     this.courseForm.reset;
     const courseFormAcquired: MyCourseDetail = this.courseForm.getRawValue();
+    this.courseDetail = courseFormAcquired
+    console.log(this.courseDetail)
+    this.courseservicefire?.create(this.courseDetail)
     this.store.dispatch(new CreateAction(courseFormAcquired))
     this.response$ = this.store.select(selectMessageDetails)
     this.subscription1$ = this.response$.subscribe(resp => {

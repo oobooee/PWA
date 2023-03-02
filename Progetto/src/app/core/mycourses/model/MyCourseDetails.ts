@@ -13,6 +13,6 @@ export interface MyCourseDetail{
     descrizione?: string
     lingua?: string
     categoria?: string
-
+   
  }
  
