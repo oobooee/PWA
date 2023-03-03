@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { CourseService } from 'src/app/courses/course.service';
 
 @Component({
@@ -16,12 +17,12 @@ export class HomePageComponent implements OnInit{
 
   @ViewChildren("div") divs?: QueryList<ElementRef>;
 
-  constructor(private courseService: CourseService) {
+  constructor(private courseService: CourseService, private db: AngularFirestoreModule) {
     console.log("HomePageComponent service created");
   }
 
   ngOnInit(): void {
-  
+    
   }
 
   ngAfterViewInit(){
