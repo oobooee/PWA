@@ -4,14 +4,15 @@ import { MyCourseDetail } from '../core/mycourses/model/MyCourseDetails';
 import { MyCourses } from '../core/mycourses/model/MyCourses';
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { CoursesOnCatalog } from '../courses/catalog/model/CoursesOnCatalog';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FireCourseServices {
+export class CourseCatalogService {
     private dbPath = 'courses';
 
-    courseCollection: AngularFirestoreCollection<MyCourseDetail>;
+    courseCollection: AngularFirestoreCollection<CoursesOnCatalog>;
 
 constructor(private db: AngularFirestore ) {
   
@@ -19,11 +20,11 @@ constructor(private db: AngularFirestore ) {
     this.courseCollection =   this.db.collection(this.dbPath);
   }
 
-  getAll(): AngularFirestoreCollection<MyCourseDetail> {
+  getAll(): AngularFirestoreCollection<CoursesOnCatalog> {
     return this.courseCollection;
   }
 
-  create(course: MyCourseDetail): any {
+  create(course: CoursesOnCatalog): any {
   
     return this.courseCollection.add({ ...course });
   }

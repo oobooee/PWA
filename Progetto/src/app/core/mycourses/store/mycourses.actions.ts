@@ -21,6 +21,8 @@ export enum EMyCoursesActions {
   CREATE_FAILURE = '[MyCourses] Create Failure',
   RESET_STORAGE = '[RESET STORAGE] Reset successful',
   RESET_RESP_STORAGE = '[RESET STORAGE RESP] Reset response successful',
+  FIRE_SHOW_ALL = ' [MyCourseDetail] Show detail ',
+  FIRE_SAVE_ON_STORAGE =  ' [MyCourseDetail] Show detail ',
 }
 
 export class ShowAllAction implements Action {
@@ -98,4 +100,13 @@ export class CreateFailureAction implements Action {
   constructor(public payload: any) { }
 }
 
-export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | ResetStorage | ResetStorageResponse | CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction | PatchCourseAction | PatchCourseSuccessAction | SaveOnStorage | SaveOnStorageSuccess;
+
+
+export class FireShowAllAction implements Action {
+  readonly type = EMyCoursesActions.FIRE_SHOW_ALL;
+}
+export class FireSaveOnStorage implements Action {
+  readonly type = EMyCoursesActions.FIRE_SAVE_ON_STORAGE;
+  constructor(public payload: MyCourseDetail[]) { }
+}
+export type ALL_REDUCER_ACTIONS = ShowAllSuccessAction | FireShowAllAction |FireSaveOnStorage| ResetStorage | ResetStorageResponse | CreateSuccessAction | CreateFailureAction | ShowDetailSuccessAction | ShowDetailAction | GetTeacherSuccessAction | PatchCourseAction | PatchCourseSuccessAction | SaveOnStorage | SaveOnStorageSuccess;

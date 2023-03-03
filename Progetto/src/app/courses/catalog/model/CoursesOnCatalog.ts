@@ -1,5 +1,7 @@
+import { Reviews } from "./Reviews";
 
-export interface MyCourseDetail{
+
+export interface CoursesOnCatalog{
     
     id_corso?: number;
     titolo?: string;
@@ -14,6 +16,9 @@ export interface MyCourseDetail{
     descrizione?: string
     lingua?: string
     categoria?: string
+    image?: string
+    longdescr?: string
+    recensioni?: Reviews[];
    
  }
  

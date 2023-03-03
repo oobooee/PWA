@@ -14,6 +14,7 @@ export interface AppState {
 }
 
 export interface MyCoursesState {
+    //catalog: Courses[]
     myCourses: MyCourses[];
     myDraft: MyCourseDetail[];
     myCourseDetail: MyCourseDetail;

@@ -1,14 +1,60 @@
-
 <br>
 <!-- <h5 class="center">Welcome to MyUdemy  - {{title}}</h5> -->
 <br>
 <app-carousel></app-carousel>
 
+
+<ngb-carousel [wrap]="true">
+  <ng-template ngbSlide  [showNavigationArrows]="true"
+    [showNavigationIndicators]="true" *ngFor="let c of coursesCatalogFromFire; let i = index">
+    <div class="card" >
+      <div class="card-header">
+        {{c.categoria}}
+      </div>
+      <div class="card-body text-center">
+        
+        <img [src]="c?.image" class="card-img-top">
+        <h5 class="card-title">{{ c.titolo }}</h5>
+        <h6 class="card-text"> {{c.descrizione}}</h6>
+        <br>
+        <blockquote  *ngIf="c.recensioni">
+          <footer class="blockquote-footer"> {{c.recensioni[0].autore}}<br>
+            <cite >{{c.recensioni[0].testo}} - Voto: {{c.recensioni[0].voto}}</cite>
+           </footer>
+     </blockquote>
+      </div>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+
+
+
+
+<!-- (click)="setCourseDetails(c.id_corso!)" -->
 <!-- Button trigger modal -->
 
+<!-- <div class="mycarousel">
+  <ngb-carousel>
+    <ng-template ngbSlide *ngFor="let c of coursesCatalogFromFire; let i = index" [showNavigationArrows]="true"
+      [showNavigationIndicators]="true">
+      <div class="card">
+        <div class="card-body">
+          <img [src]="c?.image" class="card-img-top">
+          <h6 class="card-title">{{c.titolo}}</h6>
+          <p class="card-descr">Description: {{c.descrizione}} </p>
+          <p class="card-descr">Total seats: {{c.numPosti}} </p>
+          <p class="card-descr">Available seats: {{c.numPostiDisponibili}} </p>
+        </div>
+      </div>
+    </ng-template>
+
+  </ngb-carousel>
+</div> -->
 
 
-  <!-- Modal
+
+<!-- Modal
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -27,4 +73,3 @@
     </div>
   </div>
  -->
-

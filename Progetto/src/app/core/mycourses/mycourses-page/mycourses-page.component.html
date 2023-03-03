@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-sm">
       <h6>Course Lists</h6>
-      <div class="card" *ngFor="let c of coursesFire; let i = index">
+      <!-- <div class="card" *ngFor="let c of coursesFire; let i = index">
 
         <div class="card-body">
           <h6 class="card-title">Course ID: {{ c.id_corso }}</h6>
@@ -21,7 +21,7 @@
             Details:
           </svg>
         </div>
-      </div>
+      </div> -->
       <br>
       <button class="btn btn-primary" (click)="createForm()">Create a new Course</button>
 
@@ -48,6 +48,7 @@
           <p class="card-text">Description: {{mycoursedetail?.descrizione}}</p>
           <p class="card-text">Language: {{mycoursedetail?.lingua}}</p>
           <p class="card-text">Category: {{mycoursedetail?.categoria}}</p>
+          
           <svg type=button class="bi" width="26" height="26" fill="red" (click)="enableForm()">
             <use xlink:href="bootstrap-icons.svg#pen" />
             Edit:
@@ -110,6 +111,7 @@
           <input type="text" class="form-control form-control-sm" formControlName="categoria" id="categoria"
             aria-describedby="categoria">
         </div><br>
+       
         <button type="submit" id="editbutton" class="btn btn-danger" [disabled]="!courseForm.valid">Patch on remote
           db</button> &nbsp;
         <button type="reset" class="btn btn-secondary" (click)="disableForm()"> Back</button>
@@ -168,6 +170,10 @@
           <input type="text" class="form-control form-control-sm" formControlName="categoria" id="categoria"
             aria-describedby="categoria">
         </div>
+        <div class="mb-3" class="form-group">Image:
+          <input type="text" class="form-control form-control-sm" formControlName="image" id="image"
+            aria-describedby="image">
+        </div><br>
         <br>
         <button type="submit" id="createbutton" class="btn btn-primary btn-sm" [disabled]="!courseForm.valid"
           (click)="saveOndDB()">Save and submit </button>

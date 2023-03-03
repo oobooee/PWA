@@ -1,22 +1,18 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription, map } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CustomValidators } from 'src/app/commons/validators/custom-validators';
 import { Feedback } from 'src/app/model/feedback.model';
 import { AppState } from 'src/app/store/app.states';
 import { MyCourseDetail } from '../model/MyCourseDetails';
 import { MyCourses } from '../model/MyCourses';
 import { Teacher } from '../model/Teacher';
-import { CreateAction, ID, PatchCourseAction, ResetStorageResponse, SaveOnStorageSuccess, ShowAllAction } from '../store/mycourses.actions';
+import { CreateAction, ID, PatchCourseAction, ResetStorageResponse, SaveOnStorageSuccess } from '../store/mycourses.actions';
 import { draftedCourse, selectMessageDetails, selectMyCourseDetail, selectMyCoursesList, selectTeacheDetails } from '../store/mycourses.selector';
-import { FireCourseServices } from 'src/app/services/firecourses.service';
-import { FirebaseApp } from '@angular/fire/app';
-import { CourseService } from 'src/app/courses/course.service';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { CourseCatalogService } from 'src/app/services/coursecatalog.service';
+import { CoursesOnCatalog } from 'src/app/courses/catalog/model/CoursesOnCatalog';
 
 
 @Component({
@@ -49,13 +45,13 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
   @ViewChild('form1')
   form1?: ElementRef;
   
-  coursesFireObj$?:AngularFirestoreCollection<MyCourseDetail>
+  
   //@Input()
-  courseDetail?: MyCourseDetail;
-  coursesFire?: MyCourseDetail[];
+  courseDetail?: CoursesOnCatalog;
+ 
   //coursesFire?: AngularFirestoreDocument<any>;
   
-  constructor(private store: Store<AppState>, private form: FormBuilder, private courseservicefire: FireCourseServices ) {
+  constructor(private store: Store<AppState>, private form: FormBuilder, private courseservicefire: CourseCatalogService ) {
    
     
     
@@ -81,13 +77,14 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
         descrizione: ['', [CustomValidators.totalempty]],
         lingua: ['', [CustomValidators.totalempty]],
         categoria: ['', [CustomValidators.totalempty]],
+        image: ['',]
 
       },
     );
 
   }
   ngOnInit(): void {
-    this.getAllCourses();
+    //this.getAllCourses();
     //this.getUserDetails();
     this.displayCreate = "none";
   }
@@ -101,18 +98,7 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
     //this.form1.nativeElement.block;
       }
 
-  getAllCourses(): void {
-    this.courseservicefire.getAll().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe(data => {
-      this.coursesFire = data;
-    });
-    //this.store.dispatch(new ShowAllAction());
-  }
+  
   // getUserDetails(){
   //   this.store.dispatch(new GetTeacherAction());
   // }
@@ -143,7 +129,7 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
     console.log("save on db");
    
     this.courseForm.reset;
-    const courseFormAcquired: MyCourseDetail = this.courseForm.getRawValue();
+    const courseFormAcquired: CoursesOnCatalog = this.courseForm.getRawValue();
     this.courseDetail = courseFormAcquired
     console.log(this.courseDetail)
     this.courseservicefire?.create(this.courseDetail)
@@ -204,6 +190,7 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
       descrizione: this.courseDetail?.descrizione,
       lingua: this.courseDetail?.lingua,
       categoria: this.courseDetail?.categoria,
+      
     })
 
 
@@ -241,6 +228,7 @@ export class MycoursesPageComponent implements OnInit, OnDestroy {
         descrizione: ['', [CustomValidators.totalempty]],
         lingua: ['', [CustomValidators.totalempty]],
         categoria: ['', [CustomValidators.totalempty]],
+        image:  ['']
       })
 
     this.display = "none";
