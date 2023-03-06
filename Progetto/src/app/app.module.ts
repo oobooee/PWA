@@ -31,6 +31,11 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { AuthService } from './shared/services/auth.service';
 
 
 
@@ -64,6 +69,9 @@ export function tokenGetter() {
     TextValidatorDirective,
     ObservablePageComponent,
     PipePageComponent,
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
 
   ],
   imports: [
@@ -83,12 +91,12 @@ export function tokenGetter() {
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot( [MyCoursesEffects] ),
     AngularFireModule.initializeApp(environment.firebase),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
+    AngularFireAuthModule,
+    //provideDatabase(() => getDatabase()),
     AngularFirestoreModule
     
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

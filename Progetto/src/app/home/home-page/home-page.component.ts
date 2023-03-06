@@ -12,10 +12,13 @@ import { AppState } from 'src/app/store/app.states';
 import { NgbPopoverConfig, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { Reviews } from 'src/app/courses/catalog/model/Reviews';
 
+
+
 @Component({
   selector: 'app-home-page', 
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
+  
 })
 
 

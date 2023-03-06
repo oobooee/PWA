@@ -17,6 +17,8 @@
           </li>
         </ul>
 
+        
+
         <ul class="nav navbar-nav navbar-right" [hidden]="!(isLogged() || isLoggedUser()) || (isLoggedUser())">
           <li class="nav-item">
             <a class="nav-link" routerLink="users">Users ops</a>
@@ -73,7 +75,26 @@
       <!-- <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li> -->
-      <ul class="nav navbar-nav navbar-right text-light" [hidden]="!(isLogged() || isLoggedUser())"
+
+        <ul class="nav navbar-nav navbar-right" >
+          <li class="nav-item">
+            <a class="nav-link" routerLink="dashboard" [hidden]="!isLoggedOnFire()" >My profile</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" [hidden]="!isLoggedOnFire()">
+          <svg type=button class="bi" width="26" height="26" fill="white" (click)="openModalMessage()">
+            <use xlink:href="bootstrap-icons.svg#person-x-fill" />
+          </svg>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" [hidden]="isLoggedOnFire()">
+          <svg type=button routerLink="login" class="bi" width="26" height="26" fill="white">
+            <use xlink:href="bootstrap-icons.svg#person-circle" />
+          </svg>
+        </ul>
+
+
+      <!-- <ul class="nav navbar-nav navbar-right text-light" [hidden]="!(isLogged() || isLoggedUser())"
         *ngIf="(teacherDetails$ |   async); let teacherDetails">
         <li> Welcome {{teacherDetails?.username}}     &nbsp;&nbsp;
       </ul>
@@ -82,8 +103,9 @@
         <svg type=button routerLink="login" class="bi" width="26" height="26" fill="white">
           <use xlink:href="bootstrap-icons.svg#person-circle" />
         </svg>
+      </ul> -->
 
-      </ul>
+
       <ul class="nav navbar-nav navbar-right" [hidden]="!(isLogged() || isLoggedUser()) ">
         <svg type=button class="bi" width="26" height="26" fill="white" (click)="openModalMessage()">
           <use xlink:href="bootstrap-icons.svg#person-x-fill" />
