@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, Directive, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -13,23 +13,18 @@ import { NgbPopoverConfig, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { Reviews } from 'src/app/courses/catalog/model/Reviews';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-home-page', 
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
 
 
+
 export class HomePageComponent implements OnInit {
   title = 'Progetto MWT Angular Giarrusso Paolantonio';
-
-  @ViewChild('openbutton')
-  btn?: ElementRef
-
-  //coursesFireObj$?:AngularFirestoreCollection<MyCourseDetail>
+  hide?:boolean 
   
   coursesCatalogFromFire?: CoursesOnCatalog[];
-
-  @ViewChildren("div") divs?: QueryList<ElementRef>;
 
   constructor(private store: Store<AppState>, private courseCatalogService: CourseCatalogService, popover: NgbPopoverConfig) {
     console.log("HomePageComponent service created");
@@ -38,13 +33,11 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
    // this.init();
     this.getAllCourses();
-
+    this.hide = false
+ 
   }
 
-  ngAfterViewInit() {
-    this.btn?.nativeElement.display;
-    this.divs?.forEach(div => console.log(div));
-  }
+  
 
   getAllCourses(): void {
     this.courseCatalogService.getAll().snapshotChanges().pipe(
