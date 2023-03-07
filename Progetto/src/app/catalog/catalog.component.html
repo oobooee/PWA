@@ -1,0 +1,88 @@
+<br>
+<div class="container">
+  <div class="row height d-flex justify-content-center align-items-center">
+    <div class="input-group">
+      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+        aria-describedby="search-addon" />
+      <button type="button" class="btn btn-outline-primary">search</button>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<ngb-carousel [wrap]="true">
+  <ng-template ngbSlide *ngFor="let c of coursesCatalogFromFire; let i = index">
+    <div class="card">
+      <div class="card-header">
+        {{c.categoria}}
+      </div>
+      <div class="card-body text-center" (click)="openModalMessage(c.id_corso!)">
+
+        <img [src]="c?.image" class="card-img-top">
+        <h5 class="card-title">{{ c.titolo }}</h5>
+        <h6 class="card-text"> {{c.descrizione}}</h6>
+        <br>
+        <blockquote *ngIf="c.recensioni">
+          <footer class="blockquote-footer"> {{c.recensioni[0].autore}}<br>
+            <cite>{{c.recensioni[0].testo}} - Voto: {{c.recensioni[0].voto}}</cite>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+
+<div class="modal" tabindex="-1" [ngStyle]="{'display':display}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+        <div class="col">
+          <div class="card">
+            <div class="card-header border-bottom flex-column align-items-start p-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers text-primary h3 stroke-width-1 mb-2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              <h4 class="text-primary font-weight-light mb-2">Premium</h4>
+              <p class="font-size-sm mb-0">Tas sit asper natur aut odit aut nemo enim ipsam volup.</p>
+            </div>
+            <div class="card-header border-bottom justify-content-center py-4">
+              <h2 class="pricing-price">
+                <small class="align-self-start">$</small>
+                49
+                <small class="align-self-end">/month</small>
+              </h2>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled font-size-sm mb-0">
+                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check text-success mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg><strong>200GB</strong><span class="text-secondary ml-1">Storage</span></li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check text-success mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg><strong>Unlimited</strong><span class="text-secondary ml-1">Bandwidth</span></li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check text-success mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg><strong>100</strong><span class="text-secondary ml-1">Domains</span></li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check text-success mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg><strong>Unlimited</strong><span class="text-secondary ml-1">Email accounts</span></li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check text-success mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg><strong>100</strong><span class="text-secondary ml-1">Database</span></li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check text-success mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg><strong>Unlimited</strong><span class="text-secondary ml-1">FTP accounts</span></li>
+                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check text-success mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg><strong>7x24</strong><span class="text-secondary ml-1">Support</span></li>
+              </ul>
+            </div>
+            <div class="card-footer justify-content-center p-3">
+              <button class="btn btn-outline-primary">SUBSCRIBE PLAN</button>
+            </div>
+          </div>
+        </div>
+        <p>Wrong username or password or server is down</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" (click)="closeModalMessage()">Back</button>
+        <br>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
+
+
+
+  

@@ -6,27 +6,6 @@
 <app-carousel></app-carousel>
 
 
-<ngb-carousel [wrap]="true">
-  <ng-template ngbSlide  *ngFor="let c of coursesCatalogFromFire; let i = index">
-    <div class="card" >
-      <div class="card-header">
-        {{c.categoria}}
-      </div>
-      <div class="card-body text-center">
-        
-        <img [src]="c?.image" class="card-img-top">
-        <h5 class="card-title">{{ c.titolo }}</h5>
-        <h6 class="card-text"> {{c.descrizione}}</h6>
-        <br>
-        <blockquote  *ngIf="c.recensioni">
-          <footer class="blockquote-footer"> {{c.recensioni[0].autore}}<br>
-            <cite >{{c.recensioni[0].testo}} - Voto: {{c.recensioni[0].voto}}</cite>
-           </footer>
-     </blockquote>
-      </div>
-    </div>
-  </ng-template>
-</ngb-carousel>
 </div>
 
 

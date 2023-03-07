@@ -15,11 +15,11 @@ import { HighlightDirective } from './commons/directives/highlight.directive';
 import { EmailValidatorDirective } from './commons/directives/email-validator.directive';
 import { TextValidatorDirective } from './commons/directives/text-validator.directive';
 import {HttpClientModule} from '@angular/common/http';
-import { ObservablePageComponent } from './observables/observable-page/observable-page.component';
+//import { ObservablePageComponent } from './observables/observable-page/observable-page.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginResult } from './login/login-page/login-result.model';
 import { AppConstants } from './app.constants';
-import { PipePageComponent } from './pipes/pipe-page/pipe-page.component';
+//import { PipePageComponent } from './pipes/pipe-page/pipe-page.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducers } from './store/app.reducers';
@@ -36,6 +36,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthService } from './shared/services/auth.service';
+import { CatalogComponent } from './catalog/catalog.component';
 
 
 
@@ -67,11 +68,12 @@ export function tokenGetter() {
     HighlightDirective,
     EmailValidatorDirective,
     TextValidatorDirective,
-    ObservablePageComponent,
-    PipePageComponent,
+    //ObservablePageComponent,
+    //PipePageComponent,
     DashboardComponent,
     SignInComponent,
     SignUpComponent,
+    CatalogComponent
 
   ],
   imports: [

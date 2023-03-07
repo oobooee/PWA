@@ -1,0 +1,13 @@
+
+.center {
+    display: flex;
+    justify-content: center;
+  }
+ .card-img-top{
+    max-width: 220px;
+    max-height: 220px;
+  }
+  .mycarousel{
+     align-items:center;
+
+}
