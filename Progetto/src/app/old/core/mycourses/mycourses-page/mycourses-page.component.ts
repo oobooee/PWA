@@ -11,7 +11,7 @@ import { MyCourses } from '../model/MyCourses';
 import { Teacher } from '../model/Teacher';
 import { CreateAction, ID, PatchCourseAction, ResetStorageResponse, SaveOnStorageSuccess } from '../store/mycourses.actions';
 import { draftedCourse, selectMessageDetails, selectMyCourseDetail, selectMyCoursesList, selectTeacheDetails } from '../store/mycourses.selector';
-import { CourseCatalogService } from 'src/app/services/coursecatalog.service';
+import { CourseCatalogService } from 'src/app/shared/services/coursecatalog.service';
 import { CoursesOnCatalog } from 'src/app/courses/catalog/model/CoursesOnCatalog';
 
 

@@ -1,16 +1,11 @@
-import { Component, Directive, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { Actions } from '@ngrx/effects';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
-import { MyCourseDetail } from 'src/app/core/mycourses/model/MyCourseDetails';
-import { FireShowAllAction, SaveOnStorage, ShowAllAction } from 'src/app/core/mycourses/store/mycourses.actions';
-import { CoursesOnCatalog } from 'src/app/courses/catalog/model/CoursesOnCatalog';
-import { CourseService } from 'src/app/courses/course.service';
-import { CourseCatalogService } from 'src/app/services/coursecatalog.service';
-import { AppState } from 'src/app/store/app.states';
-import { NgbPopoverConfig, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
-import { Reviews } from 'src/app/courses/catalog/model/Reviews';
+
+import { CourseCatalogService } from 'src/app/shared/services/coursecatalog.service';
+
+import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
+import { AppState } from 'src/app/old/store/app.states';
+import { CoursesOnCatalog } from 'src/app/catalog/model/CoursesOnCatalog';
 
 
 
@@ -25,11 +20,11 @@ import { Reviews } from 'src/app/courses/catalog/model/Reviews';
 
 export class HomePageComponent  {
   title = 'Progetto MWT Angular Giarrusso Paolantonio';
-  hide?:boolean 
+ 
   
-  coursesCatalogFromFire?: CoursesOnCatalog[];
 
-  constructor(private store: Store<AppState>, private courseCatalogService: CourseCatalogService, popover: NgbPopoverConfig) {
+
+  constructor() {
     console.log("HomePageComponent service created");
   }
 

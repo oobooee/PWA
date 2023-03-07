@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { CourseCatalogService } from '../services/coursecatalog.service';
+import { CourseCatalogService } from '../shared/services/coursecatalog.service';
 import { map } from 'rxjs';
 import { CoursesOnCatalog } from './model/CoursesOnCatalog';
 import { CarouselComponent } from '../commons/carousel/carousel.component';

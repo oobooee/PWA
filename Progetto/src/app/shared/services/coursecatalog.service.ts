@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { MyCourseDetail } from '../core/mycourses/model/MyCourseDetails';
-import { MyCourses } from '../core/mycourses/model/MyCourses';
 
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { CoursesOnCatalog } from '../courses/catalog/model/CoursesOnCatalog';
-import { doc } from 'firebase/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+
 import { Observable } from 'rxjs';
+import { CoursesOnCatalog } from '../../catalog/model/CoursesOnCatalog';
 
 @Injectable({
   providedIn: 'root'
