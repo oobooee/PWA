@@ -3,6 +3,7 @@ import { CourseCatalogService } from '../shared/services/coursecatalog.service';
 import { map } from 'rxjs';
 import { CoursesOnCatalog } from './model/CoursesOnCatalog';
 import { CarouselComponent } from '../commons/carousel/carousel.component';
+import { AuthService } from '../shared/services/auth.service';
 
 
 
@@ -19,7 +20,7 @@ export class CatalogComponent {
 
   coursesCatalogFromFire?: CoursesOnCatalog[];
   display = "";
-  constructor(private courseCatalogService: CourseCatalogService,){
+  constructor(private courseCatalogService: CourseCatalogService, private auth: AuthService){
 
  
 
@@ -28,7 +29,6 @@ export class CatalogComponent {
   ngOnInit(): void {
     // this.init();
      this.getAllCourses();
-     //this.hide = false
   
    }
  
@@ -46,20 +46,29 @@ export class CatalogComponent {
      });
      //this.store.dispatch(new FireShowAllAction());
    }
-   // id_corso?: number;
-   //   titolo?: string;
-   //   numPosti?: number;
-   //   numPostiDisponibili?: number
-   //   previstoEsame?: string
-   //   prezzo?: number
-   //   inizio?: Date
-   //   fine?: Date
-   //   crediti?: number
-   //   ore?: number
-   //   descrizione?: string
-   //   lingua?: string
-   //   categoria?: string
-   //   image?: string
+
+   getnextfromserver() {
+    let max: number = 10000;
+    return Math.floor(Math.random() * max);
+  }
+
+  getCoursebyID(): void {
+   this.courseCatalogService.getAll().snapshotChanges().pipe(
+     map(changes =>
+       changes.map(c =>
+         ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+       )
+     )
+   ).subscribe(data => {
+     this.coursesCatalogFromFire = data;
+   });
+   //this.store.dispatch(new FireShowAllAction());
+ }
+
+ islogged(): boolean{
+  return this.auth.isLoggedIn
+
+ }
    
    init() {
      let da = new Date(1683621000000);
@@ -112,32 +121,7 @@ export class CatalogComponent {
  
    }
  
-   getnextfromserver() {
-     let max: number = 10000;
-     return Math.floor(Math.random() * max);
-   }
-
-   getCoursebyID(): void {
-    this.courseCatalogService.getAll().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe(data => {
-      this.coursesCatalogFromFire = data;
-    });
-    //this.store.dispatch(new FireShowAllAction());
-  }
-
-   openModalMessage(titolo: number) {
-    this.display = "block";
-    console.log(titolo)
 
 
-  }
-  closeModalMessage() {
-    this.display = "none";
-  }
 
   }
